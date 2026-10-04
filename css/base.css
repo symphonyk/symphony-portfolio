@@ -1,0 +1,209 @@
+/* Shared styles: fonts, colors, and the little "stationery" pieces
+   (pushpins, washi tape, polaroids, sticky notes) used on every page. */
+
+:root {
+  --ink: #2d2a32;
+  --ink-soft: #5b5561;
+  --paper: #fffdf6;
+  --sticky-yellow: #ffe98a;
+  --sticky-pink: #ffc1d4;
+  --sticky-blue: #bfe3f2;
+  --cherry: #e0475b;
+  --shadow: 0 1px 1px rgba(40, 22, 8, .35), 0 3px 5px rgba(40, 22, 8, .22), 1px 10px 16px -4px rgba(40, 22, 8, .35);
+  --shadow-lifted: 0 4px 6px rgba(40, 22, 8, .3), 0 22px 38px rgba(40, 22, 8, .38);
+  --hand: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+  --marker: "Permanent Marker", "Marker Felt", cursive;
+  --type: "Special Elite", "Courier New", monospace;
+  --body: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* corkboard type: heavy grotesk + editorial serif + mono + ballpoint */
+  --grotesk: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --serif: "Instrument Serif", Georgia, serif;
+  --mono: "DM Mono", ui-monospace, Menlo, monospace;
+  --pen: "Reenie Beanie", "Bradley Hand", cursive;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--body);
+  line-height: 1.6;
+}
+
+img, video { display: block; max-width: 100%; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px dashed var(--cherry);
+  outline-offset: 6px;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.cork {
+  background:
+    radial-gradient(ellipse at 30% 10%, rgba(255, 236, 205, .18), transparent 60%),
+    radial-gradient(ellipse at 80% 95%, rgba(60, 32, 10, .25), transparent 55%),
+    #b98a55 url("../assets/textures/cork.jpg") 0 0 / 720px 720px repeat;
+  background-attachment: fixed;
+}
+
+/* ---------- pushpin ---------- */
+.pin {
+  --pin: #e0475b;
+  position: absolute;
+  z-index: 3;
+  width: 1.35em;
+  height: 1.35em;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 30%, rgba(255, 255, 255, .85) 0 12%, transparent 30%),
+    radial-gradient(circle at 50% 50%, var(--pin) 0 58%, color-mix(in srgb, var(--pin) 70%, black) 100%);
+  box-shadow:
+    inset -2px -3px 4px rgba(0, 0, 0, .25),
+    3px 5px 4px rgba(40, 20, 5, .45);
+  pointer-events: none;
+}
+.pin::after {
+  /* the metal needle's shadow on the board */
+  content: "";
+  position: absolute;
+  left: 60%; top: 70%;
+  width: .9em; height: .16em;
+  background: rgba(40, 20, 5, .35);
+  border-radius: 2px;
+  transform: rotate(35deg);
+  transform-origin: left center;
+  filter: blur(1px);
+  z-index: -1;
+}
+.pin--top { top: -.45em; left: 50%; margin-left: -.675em; }
+.pin--blue { --pin: #3e8ed0; }
+.pin--yellow { --pin: #f4c02f; }
+.pin--green { --pin: #4fae6a; }
+.pin--purple { --pin: #8b64d6; }
+
+/* ---------- washi tape ---------- */
+.tape {
+  --tape: rgba(255, 176, 196, .82);
+  --tape-pattern: repeating-linear-gradient(45deg, rgba(255, 255, 255, .35) 0 6px, transparent 6px 12px);
+  position: absolute;
+  z-index: 3;
+  width: 5.5em;
+  height: 1.6em;
+  background: var(--tape-pattern), var(--tape);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .18);
+  /* ragged, torn ends */
+  clip-path: polygon(
+    0 8%, 3% 0, 6% 10%, 9% 2%, 12% 6%, 88% 4%, 91% 0, 94% 9%, 97% 2%, 100% 10%,
+    100% 90%, 97% 100%, 94% 92%, 91% 100%, 88% 95%, 12% 97%, 9% 91%, 6% 100%, 3% 93%, 0 100%);
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+.tape--top { top: -.8em; left: 50%; transform: translateX(-50%) rotate(-3deg); }
+.tape--tl { top: -.35em; left: -1.6em; transform: rotate(-38deg); width: 4.6em; }
+.tape--br { bottom: -.35em; right: -1.6em; transform: rotate(-38deg); width: 4.6em; }
+.tape--mint {
+  --tape: rgba(158, 222, 196, .85);
+  --tape-pattern: radial-gradient(circle, rgba(255, 255, 255, .6) 0 2px, transparent 2.5px) 0 0 / 10px 10px;
+}
+.tape--yellow {
+  --tape: rgba(255, 219, 110, .85);
+  --tape-pattern: repeating-linear-gradient(90deg, rgba(255, 255, 255, .4) 0 4px, transparent 4px 10px);
+}
+.tape--blue {
+  --tape: rgba(150, 196, 240, .85);
+  --tape-pattern: repeating-linear-gradient(-45deg, rgba(255, 255, 255, .45) 0 3px, transparent 3px 9px);
+}
+.tape--plaid {
+  --tape: rgba(235, 150, 150, .8);
+  --tape-pattern:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, .35) 0 3px, transparent 3px 12px),
+    repeating-linear-gradient(0deg, rgba(160, 40, 60, .25) 0 3px, transparent 3px 12px);
+}
+
+/* ---------- polaroid ---------- */
+.polaroid {
+  background: #fdfdfb;
+  padding: .9em .9em 0;
+  box-shadow: var(--shadow);
+}
+.polaroid img {
+  width: 100%;
+  aspect-ratio: 1 / 1.05;
+  object-fit: cover;
+  filter: saturate(1.05) contrast(1.02);
+}
+.polaroid figcaption,
+.polaroid .caption {
+  font-family: var(--hand);
+  font-size: 1.5em;
+  line-height: 1.1;
+  text-align: center;
+  padding: .45em .2em .55em;
+  color: var(--ink);
+}
+
+/* ---------- glossy photo print ---------- */
+.print {
+  background: #fff;
+  padding: .7em;
+  box-shadow: var(--shadow);
+}
+.print img { width: 100%; object-fit: cover; }
+.print::after {
+  content: "";
+  position: absolute;
+  inset: .7em;
+  background: linear-gradient(125deg, rgba(255, 255, 255, .35) 0%, transparent 35%, transparent 70%, rgba(255, 255, 255, .12) 100%);
+  pointer-events: none;
+}
+
+/* ---------- sticky note ---------- */
+.sticky {
+  --note: var(--sticky-yellow);
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, .06), transparent 12%),
+    linear-gradient(135deg, transparent 75%, rgba(0, 0, 0, .05)),
+    var(--note);
+  font-family: var(--hand);
+  color: #2e2a24;
+  padding: 1.2em 1.1em 1.1em;
+  box-shadow: 0 2px 3px rgba(40, 22, 8, .25), 0 14px 18px -8px rgba(40, 22, 8, .45);
+}
+.sticky--pink { --note: var(--sticky-pink); }
+.sticky--blue { --note: var(--sticky-blue); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* ---------- ballpoint marks: a circled word, a squiggle underline ---------- */
+.circled, .squiggled { position: relative; display: inline-block; }
+.circled svg, .squiggled svg {
+  position: absolute;
+  overflow: visible;
+  fill: none;
+  stroke: #2446b8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+.circled svg { inset: -.28em -.3em -.22em -.32em; width: calc(100% + .62em); height: calc(100% + .5em); stroke-width: 2.4; }
+.squiggled svg { left: 0; right: 0; bottom: -.28em; width: 100%; height: .3em; stroke-width: 2.6; }

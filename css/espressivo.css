@@ -1,0 +1,126 @@
+/* Espressivo: a clean sheet (css/sheet.css) with a little room where
+   visitors drag objects onto the table. */
+
+/* ---------- the room ---------- */
+.esp__room {
+  position: relative;
+  margin: clamp(28px, 4cqw, 56px) var(--pad) 0;
+}
+.esp__hint, .esp__done, .esp__tidy {
+  font-family: var(--pen);
+  font-size: clamp(1.35rem, 2.3cqw, 1.8rem);
+  line-height: 1;
+  color: #1f3f9a;
+}
+.esp__hint { margin: 0; transform: rotate(-1.5deg); transform-origin: left; }
+/* desktop: the note sits beside the objects; the padding keeps the table where it was */
+@media (min-width: 701px) {
+  .esp__room { padding-top: clamp(1.35rem, 2.3cqw, 1.8rem); }
+  .esp__hint {
+    position: absolute;
+    top: 9%;
+    right: 61%;
+    z-index: 2;
+    line-height: 1.15;
+    text-align: right;
+    white-space: nowrap;
+    transform-origin: right;
+    transition: opacity .3s;
+  }
+  .esp__room.has-placed .esp__hint { opacity: 0; }
+}
+.esp__tidy {
+  position: absolute;
+  top: 16%;
+  left: 3%;
+  z-index: 2;
+  padding: .5em 1em;
+  border: 0;
+  font-family: var(--marker);
+  font-size: clamp(.95rem, 1.5cqw, 1.1rem);
+  color: #1c1c1c;
+  background: var(--sticky-yellow);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: rotate(-3deg) scale(.9);
+  transition: opacity .3s, transform .3s cubic-bezier(.34, 1.56, .64, 1), box-shadow .3s ease;
+}
+.esp__room.has-placed .esp__tidy { opacity: 1; pointer-events: auto; transform: rotate(-3deg); }
+.esp__room.has-placed .esp__tidy:hover,
+.esp__room.has-placed .esp__tidy:focus-visible { transform: rotate(0) scale(1.06); box-shadow: var(--shadow-lifted); }
+.esp__done {
+  position: absolute;
+  left: 78%;
+  bottom: 84%;
+  z-index: 2;
+  margin: 0;
+  font-size: clamp(1.6rem, 2.8cqw, 2.2rem);
+  white-space: nowrap;
+  color: var(--cherry);
+  transform: translate(-50%, -50%) rotate(-3deg);
+}
+
+.esp__stage {
+  --table-l: 12%;
+  --table-w: 76%;
+  --table-b: 2%;
+  position: relative;
+  aspect-ratio: 1.75 / 1;
+  touch-action: pan-y;
+}
+.esp__table {
+  position: absolute;
+  z-index: 1;
+  left: var(--table-l);
+  bottom: var(--table-b);
+  width: var(--table-w);
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ---------- draggable things ---------- */
+.thing {
+  position: absolute;
+  z-index: 30;
+  width: var(--w);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.thing img {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 18px 10px rgba(40, 30, 20, .18));
+  transition: filter .3s ease, transform .3s cubic-bezier(.34, 1.56, .64, 1);
+}
+.thing:hover img { transform: scale(1.06); }
+.thing.is-dragging { z-index: 100; cursor: grabbing; }
+.thing.is-dragging img {
+  transform: scale(1.1) rotate(-3deg);
+  filter: drop-shadow(0 26px 14px rgba(40, 30, 20, .2));
+}
+.thing.is-settling { transition: left .45s cubic-bezier(.34, 1.4, .64, 1), top .45s cubic-bezier(.34, 1.4, .64, 1); }
+/* resting on the tabletop: a tight contact shadow */
+.thing.is-placed img {
+  filter: drop-shadow(0 1px 1px rgba(40, 22, 8, .45)) drop-shadow(0 3px 3px rgba(40, 22, 8, .2));
+}
+.thing:focus-visible { outline-offset: 4px; }
+
+@media (max-width: 700px) {
+  .esp__room { margin-top: 18px; }
+  .esp__stage { --table-l: 4%; --table-w: 92%; --table-b: 6%; aspect-ratio: .95 / 1; }
+  .thing { width: var(--mw); }
+  .esp__hint { margin: 0 0 .6em; }
+  .esp__tidy { top: 100%; left: auto; right: 0; }
+  .esp__done { left: 50%; bottom: 72%; font-size: 1.5rem; }
+}
+

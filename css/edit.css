@@ -1,0 +1,79 @@
+/* Board edit mode only (loaded with ?edit). */
+.editing .item,
+.editing .item:hover,
+.editing .item:focus-visible,
+.editing .item:focus-within {
+  cursor: move;
+  transition: none;
+  transform: rotate(var(--r));
+  z-index: var(--z, auto);
+  user-select: none;
+  touch-action: none;
+}
+.editing .item:hover { outline: 2px dashed rgba(255, 255, 255, .8); outline-offset: 4px; }
+.editing .item.is-selected { z-index: 30; }
+.editing .stash__card { transition: none; }
+.editing .letter:hover .letter__paper { transform: none; }
+
+.edit-overlay {
+  position: fixed;
+  z-index: 90;
+  pointer-events: none;
+  outline: 2px solid #ff4f8b;
+  outline-offset: 4px;
+}
+.edit-overlay[hidden] { display: none; }
+.edit-handle {
+  position: absolute;
+  pointer-events: auto;
+  width: 22px;
+  height: 22px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .5);
+}
+.edit-handle--resize { right: -15px; bottom: -15px; background: #ff4f8b; cursor: nwse-resize; }
+.edit-handle--rotate { top: -38px; left: 50%; margin-left: -11px; background: #3e8ed0; cursor: grab; }
+.edit-handle--rotate::after {
+  content: "";
+  position: absolute;
+  left: 50%; top: 100%;
+  width: 2px; height: 16px;
+  margin-left: -1px;
+  background: #fff;
+}
+
+.edit-bar {
+  position: fixed;
+  left: 50%;
+  top: 34px;
+  z-index: 100;
+  transform: translateX(-50%);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  max-width: calc(100vw - 80px);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font: 14px/1.3 system-ui, sans-serif;
+  color: #fff;
+  background: rgba(25, 22, 28, .92);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, .4);
+}
+.edit-bar__readout { min-width: 260px; opacity: .85; font-variant-numeric: tabular-nums; }
+.edit-bar button {
+  font: inherit;
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  background: #4a4550;
+}
+.edit-bar [data-act="save"] { background: #e0475b; font-weight: 600; }
+.edit-bar button:disabled { opacity: .5; cursor: default; }
+.edit-bar.is-bottom { top: auto; bottom: 34px; }
+.edit-bar details { flex-basis: 100%; font-size: 12px; opacity: .8; }
+.edit-bar summary { cursor: pointer; }
+.edit-bar details p { margin: 6px 0 0; }
