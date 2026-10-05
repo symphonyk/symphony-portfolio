@@ -12,7 +12,7 @@
 }
 .editing .item:hover { outline: 2px dashed rgba(255, 255, 255, .8); outline-offset: 4px; }
 .editing .item.is-selected { z-index: 30; }
-.editing .folder__photo { transition: none; }
+.editing .swatch__card { transition: none; }
 .editing .letter:hover .letter__paper { transform: none; }
 
 .edit-overlay {

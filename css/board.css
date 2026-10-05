@@ -505,7 +505,7 @@ a.item.admit:hover { box-shadow: none; }
 .framed--star .caption { bottom: 6%; left: 18%; }
 .framed--plaid .caption { bottom: 7%; padding: .05em .4em; left: 50%; right: auto; transform: translateX(-50%); background: #fdfdfb; box-shadow: 0 1px 2px rgba(0,0,0,.15); }
 .framed--film .caption { bottom: -.7em; left: 50%; right: auto; padding: .1em .5em; background: #fdfdfb; box-shadow: var(--shadow); transform: translateX(-50%) rotate(-3deg); }
-.framed--clip .caption { bottom: 4.5%; color: #fdfaf3; }
+.framed--clip .caption { bottom: 6.5%; }
 .framed .pin--top, .framed .tape--top { z-index: 2; }
 
 .print { padding: .75em; }
@@ -566,38 +566,78 @@ a.item.admit:hover { box-shadow: none; }
 .ransom span:nth-child(9) { font-family: "Arial Black", Impact, sans-serif; background: #cdecb7; transform: rotate(6deg); }
 .ransom span:nth-child(10) { font-family: Georgia, serif; background: var(--cherry); color: #fff; transform: rotate(-2deg); }
 
-/* ---------- folder: a manila folder with more projects inside ---------- */
-.folder {
+/* ---------- swatch book: more projects on a ring of cards ----------
+   Every card shares the front card's frame from the photo (a slight
+   rotate + skew), pivoting on the ring hole so cards swing out on hover. */
+.swatch {
   container-type: inline-size;
-  aspect-ratio: 748 / 594;
+  aspect-ratio: 643 / 806;
   filter: drop-shadow(0 1px 1px rgba(40, 22, 8, .3)) drop-shadow(0 8px 8px rgba(40, 22, 8, .28));
 }
-.folder__img { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.folder__photos {
+.swatch__book { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.swatch__card {
+  --swing: 0deg;
   position: absolute;
-  inset: 22.9% 15.1% 28.5% 14.3%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2.5%;
+  left: 16.32cqw;
+  top: 15.07cqw;
+  width: 56cqw;
+  height: 97.32cqw;
+  transform-origin: 52.5% 4.49%;
+  transform: rotate(var(--swing)) matrix(.9887, .15, -.1758, .9844, 0, 0);
+  transition: transform .55s cubic-bezier(.34, 1.45, .64, 1);
 }
-.folder__photo { display: block; overflow: hidden; transition: transform .3s cubic-bezier(.34, 1.4, .64, 1), box-shadow .3s ease; }
-.folder__photo img { width: 100%; height: 100%; object-fit: cover; }
-.folder__photo:hover,
-.folder__photo:focus-visible { position: relative; z-index: 2; transform: scale(1.08) rotate(-2deg); box-shadow: var(--shadow-lifted); }
-.folder__photo + .folder__photo:hover,
-.folder__photo + .folder__photo:focus-visible { transform: scale(1.08) rotate(2deg); }
-.folder__note {
+.swatch__card:not(.swatch__front) {
+  background: radial-gradient(circle at 52.5% 4.49%, #3a3633 0 2.6cqw, rgba(0, 0, 0, .25) 2.7cqw, transparent 3.4cqw), url("../assets/img/swatch-card.webp") center / 100% 100%;
+  box-shadow: 0 0 0 .3cqw rgba(0, 0, 0, .08), 0 2cqw 4cqw rgba(40, 22, 8, .25);
+}
+.swatch__card img {
+  position: absolute;
+  left: 9%;
+  right: 9%;
+  top: 16%;
+  width: 82%;
+  height: 50%;
+  object-fit: cover;
+  box-shadow: 0 .3cqw .8cqw rgba(0, 0, 0, .3);
+}
+/* two little staples holding each photo on, like the fabric swatches */
+.swatch__card::before,
+.swatch__card::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 17.5%;
+  width: 9cqw;
+  height: .9cqw;
+  border-radius: .4cqw;
+  background: linear-gradient(#f2f2f2, #9a9a9a 60%, #6e6e6e);
+  box-shadow: 0 .2cqw .3cqw rgba(0, 0, 0, .35);
+}
+.swatch__card::before { left: 13%; transform: rotate(-4deg); }
+.swatch__card::after { right: 13%; transform: rotate(3deg); }
+.swatch__note,
+.swatch__label {
   position: absolute;
   left: 0;
   right: 0;
-  top: 78%;
   font-family: var(--pen);
-  font-size: 10.5cqw;
   line-height: 1;
   color: #1b1b1b;
   text-align: center;
-  transform: rotate(-1deg);
-  pointer-events: none;
+  white-space: nowrap;
+}
+.swatch__note { top: 73%; font-size: 7.6cqw; transform: rotate(-2deg); }
+.swatch__label { top: 72%; font-size: 7cqw; }
+
+.swatch:hover,
+.swatch:focus-within { z-index: 20; }
+.swatch:hover .swatch__card--1,
+.swatch:focus-within .swatch__card--1 { --swing: 40deg; }
+.swatch:hover .swatch__card--2,
+.swatch:focus-within .swatch__card--2 { --swing: 78deg; transition-delay: .05s; }
+@media (hover: none) {
+  .swatch .swatch__card--1 { --swing: 40deg; }
+  .swatch .swatch__card--2 { --swing: 78deg; }
 }
 
 /* ---------- realistic paper ----------
@@ -660,7 +700,7 @@ a.item.admit:hover { box-shadow: none; }
   .projects-title { order: 3; grid-column: 1 / -1; justify-self: center; width: 92%; }
   .product:nth-of-type(n) { order: 3; }
   .sis { order: 8; grid-column: 1 / -1; width: 80%; justify-self: center; }
-  .folder { order: 4; grid-column: 1 / -1; width: 80%; justify-self: center; }
+  .swatch { order: 4; grid-column: 1 / -1; width: 80%; justify-self: center; }
   .fun { order: 5; grid-column: 1 / -1; width: 62%; justify-self: center; }
   .envelope { order: 6; grid-column: 1 / -1; width: 62%; justify-self: center; }
   .card { order: 7; grid-column: 1 / -1; width: 62%; justify-self: center; }
