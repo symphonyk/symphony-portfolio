@@ -157,7 +157,6 @@ body.sheet-page {
 .sheet__pin { font-size: clamp(.85rem, 1.6vw, 1.1rem); top: .5em; }
 .sheet__pin--l { left: 4%; }
 .sheet__pin--r { right: 10%; }
-.minis ~ .sheet .sheet__pin--r { display: none; } /* the polaroids hold that corner */
 
 .sheet__close {
   position: absolute;
