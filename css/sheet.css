@@ -509,9 +509,9 @@ body.sheet-page {
   grid-template-columns: minmax(0, 1fr) minmax(0, 22rem);
   gap: clamp(20px, 4cqw, 52px);
   align-items: start;
-  padding-right: var(--pad);
+  padding-right: calc(var(--pad) + 6cqw);
 }
-.about .clean__head { max-width: 36rem; }
+.about .clean__head { max-width: 36rem; align-self: center; padding-top: calc(var(--edge) + 72px); }
 .about .clean__tagline { margin-top: .5em; }
 .about .clean__body { margin-top: 1.4em; }
 .about__photo {
@@ -534,29 +534,13 @@ body.sheet-page {
 }
 .about__photo .tape { font-size: 15px; }
 
-/* off the clock: SF camera + red film of photos */
-.about__fun {
-  display: grid;
-  justify-items: center;
-  gap: clamp(28px, 4cqw, 44px);
-  margin-top: clamp(24px, 3cqw, 40px);
-}
-.about__clock {
-  max-width: 34rem;
-  margin: 0;
-  font: 400 clamp(1.25rem, 2.1cqw, 1.6rem)/1.35 var(--serif);
-  text-align: center;
-}
-.about__snaps {
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  align-items: center;
-  gap: clamp(12px, 2cqw, 28px);
-  width: min(100%, 980px);
-}
+/* off the clock: red film of photos + SF camera */
 .about__camera, .about__film { position: relative; margin: 0; }
 .about__camera img, .about__film img { display: block; width: 100%; height: auto; }
-.about__camera { transform: rotate(-4deg); }
+.about__film { grid-column: 1; grid-row: 2; align-self: center; margin-left: var(--pad); width: min(100% - var(--pad), 560px); justify-self: center; }
+.about__side { grid-column: 2; grid-row: 2; margin-top: clamp(16px, 2cqw, 28px); }
+.about__side .about__clock { margin: 0 0 clamp(24px, 3cqw, 36px); }
+.about__camera { width: 100%; transform: rotate(-4deg); }
 .about__camera img { filter: drop-shadow(0 10px 14px rgba(0,0,0,.28)); }
 .about__film { transform: rotate(3deg); }
 .about__film img { filter: drop-shadow(0 6px 8px rgba(0,0,0,.25)); }
@@ -574,5 +558,8 @@ body.sheet-page {
 @media (max-width: 700px) {
   .about { grid-template-columns: 1fr; padding-right: 0; }
   .about__photo { width: min(80%, 20rem); margin: 0 auto; }
-  .about__snaps { grid-template-columns: 1fr; gap: 56px; width: min(100%, 30rem); }
+  .about__film, .about__side { grid-column: auto; grid-row: auto; }
+  .about__side { padding: 0 var(--pad); }
+  .about__camera { width: 88%; margin: 0 auto; }
+  .about__film { margin: 72px auto 0; width: min(100%, 30rem); }
 }
