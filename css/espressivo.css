@@ -18,7 +18,7 @@
   .esp__room { padding-top: clamp(1.35rem, 2.3cqw, 1.8rem); }
   .esp__hint {
     position: absolute;
-    top: 24%;
+    top: 15%;
     right: 50%;
     z-index: 2;
     line-height: 1.15;
