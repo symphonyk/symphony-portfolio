@@ -609,6 +609,33 @@ a.item.admit:hover { box-shadow: none; }
   color: #1f2a4a;
   transform: rotate(-3deg);
 }
+/* papers tucked between the back and the flap pop up on hover */
+.swatch__paper {
+  --rise: 0cqw;
+  --tilt: 0deg;
+  position: absolute;
+  z-index: 2;
+  top: 26%;
+  height: 50%;
+  border-radius: .5cqw .5cqw 0 0;
+  background: url("../assets/textures/paper-grain.jpg") 0 0 / 60cqw, var(--sheet);
+  background-blend-mode: multiply, normal;
+  box-shadow: 0 0 0 .25cqw rgba(0, 0, 0, .1), 0 -.6cqw 1.6cqw rgba(40, 22, 8, .16);
+  transform: translateY(calc(-1 * var(--rise))) rotate(var(--tilt));
+  transition: transform .45s cubic-bezier(.34, 1.45, .64, 1);
+  pointer-events: none;
+}
+.swatch__paper--1 { --sheet: #c8323f; left: 12%; width: 36%; --tilt: -4deg; }
+.swatch__paper--2 { --sheet: #fbf6ec; left: 38%; width: 38%; --tilt: 3deg; }
+.swatch__paper--3 { --sheet: #e9a3ad; left: 26%; width: 30%; --tilt: -1deg; }
+/* faint ruled lines and a red header rule, so they read as pages */
+.swatch__paper--2 { background-image: linear-gradient(transparent 5cqw, #c8323f 5cqw 5.7cqw, transparent 5.7cqw), repeating-linear-gradient(transparent 0 3.4cqw, rgba(60, 80, 140, .22) 3.4cqw 3.7cqw), url("../assets/textures/paper-grain.jpg"); background-size: auto, auto, 60cqw; background-blend-mode: normal, normal, multiply, normal; }
+.swatch:hover .swatch__paper--1,
+.swatch:focus-visible .swatch__paper--1 { --rise: 17cqw; --tilt: -9deg; }
+.swatch:hover .swatch__paper--2,
+.swatch:focus-visible .swatch__paper--2 { --rise: 14cqw; --tilt: 7deg; transition-delay: .05s; }
+.swatch:hover .swatch__paper--3,
+.swatch:focus-visible .swatch__paper--3 { --rise: 21cqw; --tilt: -2deg; transition-delay: .1s; }
 a.item.swatch:hover { box-shadow: none; filter: drop-shadow(0 3px 3px rgba(40, 22, 8, .3)) drop-shadow(0 20px 20px rgba(40, 22, 8, .35)); }
 
 /* ---------- realistic paper ----------

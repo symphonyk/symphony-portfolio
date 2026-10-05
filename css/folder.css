@@ -1,22 +1,36 @@
 /* All Projects: an open manila folder on the cork. The left side is the
    inside of the front cover (swung open), the right side the back cover
-   with its tab; every project is paper-clipped inside. */
+   with its tab; every project sits inside in its board frame, sized so
+   the whole folder fits on one screen. */
 
+body.folder-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100svh;
+  min-height: 0;
+  padding-bottom: clamp(16px, 2.4vh, 30px);
+  overflow: hidden;
+}
 .folder {
   --manila: #ecdfb2;
   --folder-grain: url("../assets/textures/paper-grain.jpg") 0 0 / 420px;
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  flex: 1;
+  min-height: 0;
+  width: 100%;
   max-width: 1180px;
-  margin: clamp(30px, 3.4vw, 46px) auto 0;
+  margin: clamp(30px, 4.6vh, 46px) auto 0;
   perspective: 2600px;
   filter: drop-shadow(0 2px 2px rgba(40, 22, 8, .3)) drop-shadow(0 18px 22px rgba(40, 22, 8, .35));
   animation: folder-in .8s cubic-bezier(.22, 1, .36, 1) both;
 }
 .folder__side {
   position: relative;
-  padding: clamp(34px, 4.4vw, 60px) clamp(18px, 3.2vw, 46px) clamp(30px, 4vw, 52px);
+  min-height: 0;
+  padding: clamp(22px, 4.4vh, 46px) clamp(16px, 3vw, 44px);
   background-blend-mode: normal, normal, multiply, normal;
 }
 /* the front cover: a touch shorter than the back, shaded toward the fold */
@@ -65,68 +79,63 @@
   color: #1f2a4a;
 }
 
-/* ---------- the projects, paper-clipped in ---------- */
+/* ---------- the projects, in the same frames as on the board ---------- */
 .folder__grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: clamp(26px, 3.4vw, 46px) clamp(16px, 2.4vw, 34px);
-  align-items: start;
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(14px, 2.4vh, 30px) clamp(12px, 2vw, 28px);
+  height: 100%;
+}
+.folder__cell:nth-child(3) { grid-column: 1 / -1; }
+/* each cell sizes its frame to whatever room it has, so the folder fits the screen */
+.folder__cell {
+  container-type: size;
+  display: grid;
+  place-items: center;
+  min-height: 0;
 }
 .folder__item {
   --r: 0deg;
   position: relative;
   display: block;
-  padding: 5% 5% 0;
-  background: #fdfdfb;
-  box-shadow: var(--shadow);
+  container-type: inline-size;
+  width: min(100cqw, 66cqh);
   text-decoration: none;
   color: inherit;
   transform: rotate(var(--r));
-  transition: transform .35s cubic-bezier(.34, 1.56, .64, 1), box-shadow .3s ease;
+  transition: transform .35s cubic-bezier(.34, 1.56, .64, 1), filter .3s ease;
 }
-.folder__item:nth-child(3) { grid-column: 1 / -1; justify-self: center; width: calc(50% - clamp(8px, 1.2vw, 17px)); }
-.folder__item img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+.folder__item > img { display: block; width: 100%; height: auto; filter: drop-shadow(0 1px 1px rgba(40, 22, 8, .35)) drop-shadow(0 6px 8px rgba(40, 22, 8, .28)); }
+.folder__item:hover,
+.folder__item:focus-visible { z-index: 2; transform: rotate(0) translateY(-4px) scale(1.05); filter: drop-shadow(0 14px 18px rgba(40, 22, 8, .3)); }
 .folder__name {
-  display: block;
-  padding: .3em 0 0;
-  font: 400 clamp(1.5rem, 2.3vw, 2rem)/1 var(--pen);
+  position: absolute;
+  left: 0;
+  right: 0;
+  font: 400 13cqw/.95 var(--pen);
   text-align: center;
+  white-space: nowrap;
   color: #1f2a4a;
 }
-.folder__tag {
-  display: block;
-  padding: .25em .4em 1em;
-  font: italic 400 clamp(.82rem, 1.05vw, .95rem)/1.2 "Instrument Serif", serif;
-  text-align: center;
-  color: #6a6158;
+.folder__item .tape { z-index: 2; font-size: 4.6cqw; }
+/* captions sit where they do on the board */
+.folder__item--star .folder__name { bottom: 6%; left: 18%; }
+.folder__item--plaid .folder__name { bottom: 7%; left: 50%; right: auto; padding: .05em .4em; background: #fdfdfb; box-shadow: 0 1px 2px rgba(0, 0, 0, .15); transform: translateX(-50%); }
+.folder__item--film .folder__name { bottom: -.4em; left: 50%; right: auto; padding: .1em .5em; background: #fdfdfb; box-shadow: var(--shadow); transform: translateX(-50%) rotate(-3deg); }
+.folder__item--clip .folder__name { bottom: 6.5%; }
+/* Cherry and Spatulove aren't on the board, so they get taped polaroids */
+.folder__item--polaroid {
+  width: min(92cqw, 62cqh);
+  padding: 6% 6% 0;
+  background: linear-gradient(160deg, rgba(255, 255, 255, .45), transparent 38%, transparent 62%, rgba(70, 45, 20, .09)), url("../assets/textures/paper-grain.jpg") 0 0 / 300px, #fdfdfb;
+  background-blend-mode: normal, multiply, normal;
+  box-shadow: var(--shadow);
 }
-.folder__item:hover,
-.folder__item:focus-visible { z-index: 2; transform: rotate(0) translateY(-6px) scale(1.04); box-shadow: var(--shadow-lifted); }
-
-/* a silver paper clip over the top edge */
-.folder__clip {
-  position: absolute;
-  z-index: 1;
-  top: -16px;
-  left: 14%;
-  width: 18px;
-  height: 50px;
-  border: 2.5px solid #a3a8ad;
-  border-radius: 9px;
-  transform: rotate(-4deg);
-  filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, .3));
-}
-.folder__clip::after {
-  content: "";
-  position: absolute;
-  left: 2.5px;
-  right: 2.5px;
-  top: 7px;
-  height: 32px;
-  border: 2.5px solid #c3c7cb;
-  border-bottom: 0;
-  border-radius: 6px 6px 0 0;
-}
+.folder__item--pink { background-color: #fbd9e2; }
+.folder__photo { display: block; aspect-ratio: 1 / 1.08; overflow: hidden; }
+.folder__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.folder__item--polaroid .folder__name { position: static; display: block; padding: .28em 0 .4em; font-size: 15cqw; }
 
 @keyframes folder-in { from { opacity: 0; transform: translateY(24px) scale(.985); } }
 @keyframes folder-open { from { transform: rotateY(-82deg); opacity: .4; } }
@@ -139,7 +148,10 @@
 
 /* phones: the folder opens top-to-bottom instead */
 @media (max-width: 760px) {
-  .folder { grid-template-columns: minmax(0, 1fr); margin-top: 54px; }
+  .folder { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) minmax(0, 1fr); margin-top: 54px; }
+  .folder__side { padding: 14px 10px; }
+  .folder__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: minmax(0, 1fr); }
+  .folder__cell:nth-child(3) { grid-column: auto; }
   .folder__side--l { margin-top: 0; border-radius: 8px 8px 0 0; transform-origin: 50% 100%; animation: none; }
   .folder__side--r { border-radius: 0 0 8px 8px; }
   .folder__side--r::before { inset: 1.4% 0 auto; width: auto; height: 6px; border-inline: 0; border-block: 1px solid rgba(120, 90, 40, .22); }
