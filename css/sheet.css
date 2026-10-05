@@ -540,7 +540,7 @@ body.sheet-page {
 .about__film { grid-column: 1; grid-row: 2; align-self: start; margin-top: calc(-1 * clamp(36px, 7.5cqw, 90px)); margin-left: var(--pad); width: min(100% - var(--pad), 560px); justify-self: center; }
 .about__side { grid-column: 2; grid-row: 2; margin-top: clamp(16px, 2cqw, 28px); }
 .about__side .about__clock { margin: 0 0 clamp(24px, 3cqw, 36px); }
-.about__camera { width: 100%; transform: rotate(-4deg); }
+.about__camera { width: 100%; margin-top: clamp(12px, 2cqw, 26px); transform: rotate(-4deg); }
 .about__camera img { filter: drop-shadow(0 10px 14px rgba(0,0,0,.28)); }
 .about__film { transform: rotate(3deg); }
 .about__film img { filter: drop-shadow(0 6px 8px rgba(0,0,0,.25)); }
