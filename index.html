@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Caveat:wght@500;700&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Nunito:wght@400;600;800&family=Permanent+Marker&family=Reenie+Beanie&display=swap">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/board.css">
+  <link rel="stylesheet" href="css/guestbook.css">
 </head>
 <body class="board">
   <h1 class="visually-hidden">Symphony Koss, designer and engineer</h1>
@@ -125,11 +126,23 @@
       <a class="swatch__card swatch__front" href="projects/cherry/"><img src="assets/img/clip-cherry.webp" width="540" height="520" alt="Cherry app shown on two phones"><span class="swatch__label">Cherry App</span></a>
       <img class="pushpin pushpin--ring" src="assets/img/pin-red.webp" width="282" height="337" alt="" aria-hidden="true">
     </div>
+    <!-- thank-you notes from visitors (js/guestbook.js) -->
+    <a class="item guestcheck" href="#notes" aria-label="Thank-you notes: read them or leave Symphony a note" style="--x: 46%; --y: 58.5%; --w: 11.5%; --r: -4deg; --s: 1;">
+      <span class="gcheck">
+        <img class="gcheck__img" src="assets/img/guest-check.webp" width="383" height="644" alt="">
+        <span class="gcheck__table">1</span>
+        <span class="gcheck__waiter">Symphony</span>
+        <span class="gcheck__notes"><span class="gnote gnote--invite">✎ leave me a note!</span></span>
+        <span class="gcheck__total"></span>
+      </span>
+      <img class="pushpin" src="assets/img/pin-red.webp" width="282" height="337" alt="" aria-hidden="true">
+    </a>
   </main>
 
   <div class="board-light" aria-hidden="true"></div>
   <div class="frame" aria-hidden="true"><i class="frame__t"></i><i class="frame__r"></i><i class="frame__b"></i><i class="frame__l"></i></div>
 
   <script src="js/board.js" defer></script>
+  <script src="js/guestbook.js" defer></script>
 </body>
 </html>

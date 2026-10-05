@@ -31,6 +31,7 @@ GitHub rebuilds it in a minute or two.
 | `css/sheet.css` | Project and About pages: a paper sheet pinned over the cork |
 | `css/espressivo.css` | Espressivo's decorate-the-table room |
 | `js/board.js` | Click wiggle, "more projects in here!" envelope |
+| `js/guestbook.js`, `css/guestbook.css` | "Thank You!" guest check: visitors' notes |
 | `js/sheet.js` | Page fold-away when heading back to the board |
 | `js/scrapbook.js` | Photo lightbox |
 | `js/candy.js`, `js/espressivo.js` | Candy dispenser toy, Espressivo table items |
@@ -38,6 +39,7 @@ GitHub rebuilds it in a minute or two.
 | `projects/*/` | Other project pages (generated, see below) |
 | `assets/` | Images, videos, textures |
 | `tools/sheet.py` | Builds the generated project pages |
+| `tools/guestbook-apps-script.gs` | Google Sheet backend for the thank-you notes |
 
 ## Moving things on the board
 
@@ -95,3 +97,13 @@ a `demo` video on a film strip (optionally with the candy `toy`, driven by `js/c
 
 - Cork, wood and paper textures: [ambientCG](https://ambientcg.com) (CC0)
 - Golden Gate Bridge photo: Carol M. Highsmith, Library of Congress (public domain)
+
+## Thank-you notes
+
+Visitors' notes on the "Thank You!" guest check are saved in a Google Sheet.
+Setup steps are at the top of `tools/guestbook-apps-script.gs`; paste the web
+app URL into `NOTES_URL` in `js/guestbook.js`. Until then the check only works
+on the local preview (notes are kept in that browser) and is hidden on the live site.
+
+To take a note down, delete its row in the sheet's **Notes** tab (or type `x`
+in its Hide column). It disappears from the site on the next page load.
