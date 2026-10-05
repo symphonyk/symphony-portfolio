@@ -64,10 +64,15 @@ body.sheet-page {
     url("../assets/textures/torn-edge-left.png") top left / var(--edge) auto repeat-y,
     url("../assets/textures/torn-edge-right.png") top right / var(--edge) auto repeat-y,
     linear-gradient(#000, #000) center / calc(100% - 2 * var(--edge) + 2px) calc(100% - 2 * var(--edge) + 2px) no-repeat;
-  /* keep the side edges out of the corners so no square scraps poke out there */
-  padding: var(--edge) 0;
-  -webkit-mask-clip: border-box, border-box, content-box, content-box, border-box;
-  mask-clip: border-box, border-box, content-box, content-box, border-box;
+}
+/* where supported, one 9-slice torn frame instead: its corners are where the
+   top and side tears overlap, so they tear naturally with no square scraps */
+@supports (-webkit-mask-box-image: none) {
+  .sheet::before {
+    -webkit-mask: none;
+    mask: none;
+    -webkit-mask-box-image: url("../assets/textures/torn-frame.png") 48 / var(--edge) round;
+  }
 }
 @keyframes sheet-open {
   from { opacity: 0; transform: translateY(28px) scale(.985) rotate(-.4deg); }
