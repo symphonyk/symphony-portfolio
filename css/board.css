@@ -605,8 +605,7 @@ a.item.admit:hover { box-shadow: none; }
   transform: rotate(calc(var(--swing) + var(--lift))) matrix(.9899, .142, -.1675, .9859, 0, 0) scale(var(--grow));
   transition: transform .5s cubic-bezier(.34, 1.4, .64, 1), filter .25s ease, box-shadow .25s ease;
 }
-.swatch__front { z-index: 3; }
-a.swatch__card {
+a.swatch__card--1 {
   background: radial-gradient(circle at 51.1% 5.72%, #3a3633 0 3.4cqw, rgba(0, 0, 0, .25) 3.6cqw, transparent 4.5cqw), url("../assets/img/swatch-card.webp") center / 100% 100%;
   box-shadow: 0 0 0 .4cqw rgba(0, 0, 0, .08), 0 2cqw 4cqw rgba(40, 22, 8, .25);
 }
@@ -646,7 +645,9 @@ a.swatch__card {
   white-space: nowrap;
 }
 .swatch__note { top: 73%; font-size: 10cqw; transform: rotate(-2deg); }
-.swatch__label { top: 72%; font-size: 9.5cqw; }
+.swatch__label { top: 69%; font-size: 14cqw; }
+/* Cherry sits right on the photo's own front page, so it hangs from the real ring */
+.swatch__front { z-index: 3; transition: background-color .25s ease; }
 
 /* at rest: Spatulove peeks out a little to the right */
 .swatch__card--1 { --swing: -17deg; }
@@ -655,11 +656,13 @@ a.swatch__card {
 .swatch:hover .swatch__card--1,
 .swatch:focus-within .swatch__card--1 { --swing: -52deg; }
 /* the card under the pointer lifts out over the other one, which dims */
-a.swatch__card:hover,
-a.swatch__card:focus-visible { z-index: 4; --lift: -7deg; --grow: 1.06; box-shadow: 0 0 0 .4cqw rgba(0, 0, 0, .08), 0 4cqw 7cqw rgba(40, 22, 8, .4); }
+a.swatch__card--1:hover,
+a.swatch__card--1:focus-visible { z-index: 4; --lift: -7deg; --grow: 1.06; box-shadow: 0 0 0 .4cqw rgba(0, 0, 0, .08), 0 4cqw 7cqw rgba(40, 22, 8, .4); }
 .swatch:has(a.swatch__card:hover) a.swatch__card:not(:hover),
 .swatch:has(a.swatch__card:focus-visible) a.swatch__card:not(:focus-visible) { filter: brightness(.78) saturate(.75); }
-a.swatch__card.is-pressed { --lift: -9deg; }
+.swatch:has(a.swatch__card--1:hover) .swatch__front,
+.swatch:has(a.swatch__card--1:focus-visible) .swatch__front { background-color: rgba(40, 30, 20, .2); }
+a.swatch__card--1.is-pressed { --lift: -9deg; }
 @media (hover: none) {
   .swatch .swatch__card--1 { --swing: -52deg; }
 }
