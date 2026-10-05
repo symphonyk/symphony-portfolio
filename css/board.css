@@ -569,7 +569,7 @@ a.item.admit:hover { box-shadow: none; }
 /* ---------- red push pin: --tx/--ty mark where the needle tip goes in ---------- */
 .pushpin {
   position: absolute;
-  z-index: 3;
+  z-index: 4;
   left: var(--tx, 50%);
   top: var(--ty, 10%);
   width: var(--pw, 12%);
@@ -579,41 +579,44 @@ a.item.admit:hover { box-shadow: none; }
   pointer-events: none;
 }
 .admit .pushpin { --tx: 47%; --ty: 16%; --pw: 11%; }
-.pushpin--ring { --tx: 43%; --ty: 3.6%; --pw: 17%; }
+.pushpin--ring { --tx: 56.5%; --ty: 3.4%; --pw: 22%; }
 
 /* ---------- swatch book: more projects on a ring of cards ----------
    Every card shares the front card's frame from the photo (a slight
-   rotate + skew), pivoting on the ring hole so cards swing out on hover. */
+   rotate + skew), pivoting on the ring hole. The back pages peek out to
+   the right, fan out on hover, and the page under the pointer comes forward. */
 .swatch {
   container-type: inline-size;
-  aspect-ratio: 643 / 806;
+  aspect-ratio: 456 / 712;
   filter: drop-shadow(0 1px 1px rgba(40, 22, 8, .3)) drop-shadow(0 8px 8px rgba(40, 22, 8, .28));
 }
-.swatch__book { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.swatch__book { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .swatch__card {
   --swing: 0deg;
+  --lift: 0deg;
+  --grow: 1;
   position: absolute;
-  left: 16.32cqw;
-  top: 15.07cqw;
-  width: 56cqw;
-  height: 97.32cqw;
-  transform-origin: 52.5% 4.49%;
-  transform: rotate(var(--swing)) matrix(.9887, .15, -.1758, .9844, 0, 0);
-  transition: transform .55s cubic-bezier(.34, 1.45, .64, 1);
+  left: 21.2cqw;
+  top: 19.09cqw;
+  width: 74.11cqw;
+  height: 127.68cqw;
+  transform-origin: 51.1% 5.72%;
+  transform: rotate(calc(var(--swing) + var(--lift))) matrix(.9899, .142, -.1675, .9859, 0, 0) scale(var(--grow));
+  transition: transform .5s cubic-bezier(.34, 1.4, .64, 1), filter .25s ease, box-shadow .25s ease;
 }
-.swatch__card:not(.swatch__front) {
-  background: radial-gradient(circle at 52.5% 4.49%, #3a3633 0 2.6cqw, rgba(0, 0, 0, .25) 2.7cqw, transparent 3.4cqw), url("../assets/img/swatch-card.webp") center / 100% 100%;
-  box-shadow: 0 0 0 .3cqw rgba(0, 0, 0, .08), 0 2cqw 4cqw rgba(40, 22, 8, .25);
+.swatch__front { z-index: 3; cursor: default; }
+a.swatch__card {
+  background: radial-gradient(circle at 51.1% 5.72%, #3a3633 0 3.4cqw, rgba(0, 0, 0, .25) 3.6cqw, transparent 4.5cqw), url("../assets/img/swatch-card.webp") center / 100% 100%;
+  box-shadow: 0 0 0 .4cqw rgba(0, 0, 0, .08), 0 2cqw 4cqw rgba(40, 22, 8, .25);
 }
 .swatch__card img {
   position: absolute;
   left: 9%;
-  right: 9%;
   top: 16%;
   width: 82%;
   height: 50%;
   object-fit: cover;
-  box-shadow: 0 .3cqw .8cqw rgba(0, 0, 0, .3);
+  box-shadow: 0 .4cqw 1cqw rgba(0, 0, 0, .3);
 }
 /* two little staples holding each photo on, like the fabric swatches */
 .swatch__card::before,
@@ -622,11 +625,11 @@ a.item.admit:hover { box-shadow: none; }
   position: absolute;
   z-index: 1;
   top: 17.5%;
-  width: 9cqw;
-  height: .9cqw;
-  border-radius: .4cqw;
+  width: 12cqw;
+  height: 1.2cqw;
+  border-radius: .5cqw;
   background: linear-gradient(#f2f2f2, #9a9a9a 60%, #6e6e6e);
-  box-shadow: 0 .2cqw .3cqw rgba(0, 0, 0, .35);
+  box-shadow: 0 .25cqw .4cqw rgba(0, 0, 0, .35);
 }
 .swatch__card::before { left: 13%; transform: rotate(-4deg); }
 .swatch__card::after { right: 13%; transform: rotate(3deg); }
@@ -641,18 +644,26 @@ a.item.admit:hover { box-shadow: none; }
   text-align: center;
   white-space: nowrap;
 }
-.swatch__note { top: 73%; font-size: 7.6cqw; transform: rotate(-2deg); }
-.swatch__label { top: 72%; font-size: 7cqw; }
+.swatch__note { top: 73%; font-size: 10cqw; transform: rotate(-2deg); }
+.swatch__label { top: 72%; font-size: 9.5cqw; }
 
+/* at rest: the back pages peek out a little to the right */
+.swatch__card--1 { --swing: -7deg; }
+.swatch__card--2 { --swing: -14deg; }
 .swatch:hover,
 .swatch:focus-within { z-index: 20; }
 .swatch:hover .swatch__card--1,
-.swatch:focus-within .swatch__card--1 { --swing: 40deg; }
+.swatch:focus-within .swatch__card--1 { --swing: -34deg; }
 .swatch:hover .swatch__card--2,
-.swatch:focus-within .swatch__card--2 { --swing: 78deg; transition-delay: .05s; }
+.swatch:focus-within .swatch__card--2 { --swing: -66deg; transition-delay: .04s; }
+/* the page under the pointer lifts out over the other page, which dims */
+a.swatch__card:hover,
+a.swatch__card:focus-visible { z-index: 1; --lift: -7deg; --grow: 1.06; box-shadow: 0 0 0 .4cqw rgba(0, 0, 0, .08), 0 4cqw 7cqw rgba(40, 22, 8, .4); }
+.swatch:has(a.swatch__card:hover) a.swatch__card:not(:hover) { filter: brightness(.82) saturate(.8); }
+a.swatch__card.is-pressed { --lift: -9deg; }
 @media (hover: none) {
-  .swatch .swatch__card--1 { --swing: 40deg; }
-  .swatch .swatch__card--2 { --swing: 78deg; }
+  .swatch .swatch__card--1 { --swing: -34deg; }
+  .swatch .swatch__card--2 { --swing: -66deg; }
 }
 
 /* ---------- realistic paper ----------

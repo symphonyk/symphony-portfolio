@@ -30,8 +30,10 @@
         link.target === '_blank' ||
         link.href.startsWith('mailto:') ||
         event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0;
-      const item = link.closest('.item');
-      if (!item || reduceMotion) return;
+      if (reduceMotion) return;
+      // a swatch page wiggles on its own, not the whole book
+      const item = link.classList.contains('swatch__card') ? link : link.closest('.item');
+      if (!item) return;
 
       item.classList.remove('is-pressed');
       void item.offsetWidth; // restart the animation if clicked twice
