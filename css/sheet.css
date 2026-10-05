@@ -17,26 +17,18 @@ body.sheet-page {
   position: absolute;
   top: clamp(8px, 1vw, 14px);
   left: 0;
-  right: 0;
+  right: clamp(8px, 1.4vw, 20px);
   z-index: 5;
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-end;
   gap: clamp(10px, 1.2vw, 16px);
-  max-width: 1240px;
-  margin: 0 auto;
   padding: 8px 6px 10px;
   pointer-events: none;
 }
 .minis > * { pointer-events: auto; }
-.minis .back-tab {
-  position: relative;
-  top: auto;
-  left: auto;
-  flex: none;
-  align-self: center;
-  margin-right: clamp(4px, 1vw, 14px);
-}
+/* the back note stays in the top-left corner of the cork, like before */
+.minis .back-tab { position: fixed; }
 .minis__item {
   --r: 0deg;
   position: relative;
@@ -82,7 +74,8 @@ body.sheet-page {
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 8' preserveAspectRatio='none'%3E%3Cpath d='M2 5c14-4 26 2 40-1s26-3 38 0 14 1 18-1' fill='none' stroke='%23e0475b' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
 }
 @media (max-width: 1100px) {
-  .minis { justify-content: flex-start; overflow-x: auto; scrollbar-width: none; padding: 10px 12px 12px; }
+  .minis { justify-content: flex-start; overflow-x: auto; scrollbar-width: none; padding: 10px 12px 12px; right: 0; }
+  .minis .back-tab { position: relative; top: auto; left: auto; flex: none; align-self: center; margin-right: 8px; }
   .minis::-webkit-scrollbar { display: none; }
 }
 
@@ -164,6 +157,7 @@ body.sheet-page {
 .sheet__pin { font-size: clamp(.85rem, 1.6vw, 1.1rem); top: .5em; }
 .sheet__pin--l { left: 4%; }
 .sheet__pin--r { right: 10%; }
+.minis ~ .sheet .sheet__pin--r { display: none; } /* the polaroids hold that corner */
 
 .sheet__close {
   position: absolute;
