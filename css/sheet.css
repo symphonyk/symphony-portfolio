@@ -38,7 +38,7 @@ body.sheet-page {
   margin: 0 auto;
   filter: drop-shadow(0 1px 1px rgba(40, 22, 8, .3)) drop-shadow(0 10px 14px rgba(40, 22, 8, .32));
   transform-origin: 50% 0;
-  animation: sheet-open .7s cubic-bezier(.2, .8, .2, 1) both;
+  animation: sheet-open 1.1s cubic-bezier(.22, 1, .36, 1) both;
 }
 /* the paper itself: same grain + crinkle as the bio note, torn on all four sides */
 .sheet::before {
@@ -64,9 +64,13 @@ body.sheet-page {
     url("../assets/textures/torn-edge-left.png") top left / var(--edge) auto repeat-y,
     url("../assets/textures/torn-edge-right.png") top right / var(--edge) auto repeat-y,
     linear-gradient(#000, #000) center / calc(100% - 2 * var(--edge) + 2px) calc(100% - 2 * var(--edge) + 2px) no-repeat;
+  /* keep the side edges out of the corners so no square scraps poke out there */
+  padding: var(--edge) 0;
+  -webkit-mask-clip: border-box, border-box, content-box, content-box, border-box;
+  mask-clip: border-box, border-box, content-box, content-box, border-box;
 }
 @keyframes sheet-open {
-  from { opacity: 0; transform: translateY(46px) scale(.96) rotate(-.8deg); }
+  from { opacity: 0; transform: translateY(28px) scale(.985) rotate(-.4deg); }
 }
 .sheet.is-closing {
   animation: none;

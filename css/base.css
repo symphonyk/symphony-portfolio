@@ -186,6 +186,14 @@ a { color: inherit; }
 .sticky--pink { --note: var(--sticky-pink); }
 .sticky--blue { --note: var(--sticky-blue); }
 
+/* soft cross-fade between pages (browsers that support it) */
+@view-transition { navigation: auto; }
+::view-transition-old(root),
+::view-transition-new(root) { animation-duration: .45s; animation-timing-function: ease; }
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .01ms !important;
