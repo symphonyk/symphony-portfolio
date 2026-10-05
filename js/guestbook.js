@@ -2,7 +2,7 @@
 // Notes are stored in Symphony's Google Sheet (see tools/guestbook-apps-script.gs);
 // deleting a row there (or typing x in its "Hide" column) takes a note down.
 
-const NOTES_URL = '';
+const NOTES_URL = 'https://script.google.com/macros/s/AKfycbwJgN6UmF_T-VLli9BrVPQ4v09fkfV2o7rZEAPdHPq5GZ_MPFDsAWmk6Gr1mrCI1APK/exec';
 
 (() => {
   const item = document.querySelector('.guestcheck');
