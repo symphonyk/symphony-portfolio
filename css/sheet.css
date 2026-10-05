@@ -534,7 +534,7 @@ body.sheet-page {
 }
 .about__photo .tape { font-size: 15px; }
 
-/* off the clock: band camera + red film of photos */
+/* off the clock: SF camera + red film of photos */
 .about__fun {
   display: grid;
   justify-items: center;
@@ -566,7 +566,7 @@ body.sheet-page {
   font: 400 clamp(1.9rem, 3cqw, 2.5rem)/1 var(--pen);
   color: var(--cherry);
 }
-.about__note--band { left: 6%; bottom: -1.3em; transform: rotate(-3deg); }
+.about__note--cam { left: 6%; bottom: -1.3em; transform: rotate(-3deg); }
 .about__note span { font-size: .8em; }
 .about__links { display: flex; flex-wrap: wrap; gap: .4em 1.6em; }
 .about__links a { color: #1c1c1c; text-decoration: underline; text-decoration-color: var(--cherry); text-underline-offset: .25em; }
