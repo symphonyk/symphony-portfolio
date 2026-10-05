@@ -512,8 +512,8 @@ body.sheet-page {
   padding-right: calc(var(--pad) + 6cqw);
 }
 .about .clean__head { max-width: 36rem; align-self: center; padding-top: calc(var(--edge) + 72px); }
-.about .clean__tagline { margin-top: .5em; }
-.about .clean__body { margin-top: 1.4em; }
+.about .clean__tagline { margin-top: .9em; }
+.about .clean__body { margin-top: 2em; }
 .about__photo {
   position: relative;
   margin: calc(var(--edge) + 72px) 0 0;
@@ -537,7 +537,7 @@ body.sheet-page {
 /* off the clock: red film of photos + SF camera */
 .about__camera, .about__film { position: relative; margin: 0; }
 .about__camera img, .about__film img { display: block; width: 100%; height: auto; }
-.about__film { grid-column: 1; grid-row: 2; align-self: center; margin-left: var(--pad); width: min(100% - var(--pad), 560px); justify-self: center; }
+.about__film { grid-column: 1; grid-row: 2; align-self: start; margin-top: calc(-1 * clamp(24px, 5.5cqw, 66px)); margin-left: var(--pad); width: min(100% - var(--pad), 560px); justify-self: center; }
 .about__side { grid-column: 2; grid-row: 2; margin-top: clamp(16px, 2cqw, 28px); }
 .about__side .about__clock { margin: 0 0 clamp(24px, 3cqw, 36px); }
 .about__camera { width: 100%; transform: rotate(-4deg); }
