@@ -512,6 +512,7 @@ body.sheet-page {
   padding-right: calc(var(--pad) + 6cqw);
 }
 .about .clean__head { max-width: 36rem; padding-top: calc(var(--edge) + 136px); }
+.about .clean__title { white-space: nowrap; font-size: clamp(2rem, 4.6cqw, 3.6rem); }
 .about .clean__tagline { margin-top: .9em; }
 .about .clean__body { margin-top: 2em; }
 .about__photo {
@@ -557,6 +558,7 @@ body.sheet-page {
 .about__links a:hover { color: var(--cherry); }
 @media (max-width: 700px) {
   .about { grid-template-columns: 1fr; padding-right: 0; }
+  .about .clean__head { padding-top: calc(var(--edge) + 34px); }
   .about__photo { width: min(80%, 20rem); margin: 0 auto; }
   .about__film, .about__side { grid-column: auto; grid-row: auto; }
   .about__side { padding: 0 var(--pad); }
