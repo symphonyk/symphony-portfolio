@@ -47,6 +47,8 @@ const NOTES_URL = 'https://script.google.com/macros/s/AKfycbwJgN6UmF_T-VLli9BrVP
     const el = document.createElement('span');
     el.className = 'gnote';
     el.dataset.n = number;
+    const when = new Date(n.t || Date.now());
+    el.dataset.date = `${when.getMonth() + 1}/${when.getDate()}/${String(when.getFullYear()).slice(2)}`;
     const text = document.createElement('span');
     text.className = 'gnote__text';
     text.textContent = n.note;
@@ -60,7 +62,7 @@ const NOTES_URL = 'https://script.google.com/macros/s/AKfycbwJgN6UmF_T-VLli9BrVP
   function invite() {
     const el = document.createElement('span');
     el.className = 'gnote gnote--invite';
-    el.textContent = '✎ leave me a note!';
+    el.textContent = '✎ leave a note!';
     return el;
   }
 
@@ -103,8 +105,8 @@ const NOTES_URL = 'https://script.google.com/macros/s/AKfycbwJgN6UmF_T-VLli9BrVP
         </div>
       </div>
       <form class="gb__slip" novalidate>
-        <h2 class="gb__title" id="gb-title">Leave me a note!</h2>
-        <p class="gb__hint">It'll be written on the check for everyone to see.</p>
+        <h2 class="gb__title" id="gb-title">Leave a note!</h2>
+        <p class="gb__hint">It'll be posted on the board for everyone to see.</p>
         <label for="gb-note">Your note</label>
         <textarea id="gb-note" name="note" maxlength="${MAX_NOTE}" required placeholder="Say hi, share a thought…"></textarea>
         <p class="gb__count" aria-live="polite">0 / ${MAX_NOTE}</p>

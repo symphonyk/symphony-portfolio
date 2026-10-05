@@ -56,12 +56,15 @@
   color: #6b7280;
 }
 .gnote::after {
-  content: "♥";
+  content: attr(data-date);
   position: absolute;
   left: 74.9%;
   top: 0;
   width: 13.9%;
   text-align: center;
+  font-size: .74em;
+  line-height: var(--row);
+  white-space: nowrap;
   color: #c43a44;
 }
 .gnote__by { color: #b8323a; white-space: nowrap; }
@@ -92,7 +95,7 @@ a.item.guestcheck:focus-visible { box-shadow: none; filter: drop-shadow(0 3px 3p
   display: grid;
   place-items: center;
   overflow: auto;
-  padding: 3vh 4vw;
+  padding: 9vh 4vw 3vh;
 }
 .gb[hidden] { display: none; }
 .gb__backdrop {
@@ -118,8 +121,8 @@ a.item.guestcheck:focus-visible { box-shadow: none; filter: drop-shadow(0 3px 3p
 .gb__checkholder { position: relative; transform: rotate(-1.2deg); }
 .gb .gcheck {
   width: auto;
-  height: min(76vh, 820px);
-  height: min(76dvh, 820px);
+  height: min(72vh, 800px);
+  height: min(72dvh, 800px);
   filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .3)) drop-shadow(0 18px 26px rgba(0, 0, 0, .4));
 }
 .gb__pin {
