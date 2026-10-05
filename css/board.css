@@ -479,27 +479,25 @@ a.item.admit:hover { box-shadow: none; }
 .pennant__img { position: absolute; inset: 0; width: 100%; height: 100%; }
 .pennant__text {
   position: absolute;
-  left: 17%;
-  top: 46%;
-  font-family: var(--grotesk);
-  font-weight: 800;
-  font-stretch: 75%;
-  font-size: 14.5cqw;
-  line-height: 1;
-  letter-spacing: .05em;
-  color: #f4ece0;
-  filter: url(#felt);
-  transform: translateY(-50%) rotate(3deg);
-  transform-origin: 0 50%;
+  left: 19%;
+  top: 57%;
   display: flex;
   align-items: center;
+  font-family: "Lilita One", var(--grotesk);
+  font-size: 10cqw;
+  line-height: 1;
+  letter-spacing: -.01em;
+  color: #f6efe3;
+  filter: url(#felt) drop-shadow(0 .04em .03em rgba(60, 10, 10, .45));
+  transform: translateY(-50%) rotate(2.5deg);
+  transform-origin: 0 50%;
 }
-/* letters shrink toward the pennant's point */
+/* letters shrink to fill the pennant as it narrows to a point */
 .pennant__text i { font-style: normal; }
-.pennant__text i:nth-child(1) { font-size: 1.3em; }
-.pennant__text i:nth-child(2) { font-size: 1em; }
-.pennant__text i:nth-child(3) { font-size: .76em; }
-.pennant__text i:nth-child(4) { font-size: .57em; }
+.pennant__text i:nth-child(1) { font-size: 2.45em; }
+.pennant__text i:nth-child(2) { font-size: 1.85em; }
+.pennant__text i:nth-child(3) { font-size: 1.38em; }
+.pennant__text i:nth-child(4) { font-size: 1.02em; }
 
 /* ---------- products ---------- */
 .board .caption { font-family: var(--pen); color: #1f2a4a; }
