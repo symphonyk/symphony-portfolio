@@ -521,13 +521,13 @@ a.item.admit:hover { box-shadow: none; }
 
 .polaroid.product:nth-of-type(odd) img { aspect-ratio: 1 / 1.08; }
 
-/* product photos in decorated frames (stars, film + clip, gingham, hearts) */
+/* product photos in decorated frames (stars, film + clip, gingham, blue polaroid + clip) */
 .framed img { display: block; width: 100%; height: auto; filter: drop-shadow(0 1px 1px rgba(40, 22, 8, .35)) drop-shadow(0 6px 8px rgba(40, 22, 8, .28)); }
 .framed .caption { position: absolute; left: 0; right: 0; text-align: center; }
 .framed--star .caption { bottom: 6%; left: 18%; }
 .framed--plaid .caption { bottom: 7%; padding: .05em .4em; left: 50%; right: auto; transform: translateX(-50%); background: #fdfdfb; box-shadow: 0 1px 2px rgba(0,0,0,.15); }
 .framed--film .caption { bottom: -.7em; left: 50%; right: auto; padding: .1em .5em; background: #fdfdfb; box-shadow: var(--shadow); transform: translateX(-50%) rotate(-3deg); }
-.framed--hearts .caption { bottom: 7%; left: 22%; }
+.framed--clip .caption { bottom: 6.5%; right: 14%; }
 .framed .pin--top, .framed .tape--top { z-index: 2; }
 
 .print { padding: .75em; }
