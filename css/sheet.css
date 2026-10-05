@@ -537,7 +537,7 @@ body.sheet-page {
 /* off the clock: red film of photos + SF camera */
 .about__camera, .about__film { position: relative; margin: 0; }
 .about__camera img, .about__film img { display: block; width: 100%; height: auto; }
-.about__film { grid-column: 1; grid-row: 2; align-self: start; margin-top: calc(-1 * clamp(24px, 5.5cqw, 66px)); margin-left: var(--pad); width: min(100% - var(--pad), 560px); justify-self: center; }
+.about__film { grid-column: 1; grid-row: 2; align-self: start; margin-top: calc(-1 * clamp(36px, 7.5cqw, 90px)); margin-left: var(--pad); width: min(100% - var(--pad), 560px); justify-self: center; }
 .about__side { grid-column: 2; grid-row: 2; margin-top: clamp(16px, 2cqw, 28px); }
 .about__side .about__clock { margin: 0 0 clamp(24px, 3cqw, 36px); }
 .about__camera { width: 100%; transform: rotate(-4deg); }
