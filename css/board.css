@@ -566,6 +566,21 @@ a.item.admit:hover { box-shadow: none; }
 .ransom span:nth-child(9) { font-family: "Arial Black", Impact, sans-serif; background: #cdecb7; transform: rotate(6deg); }
 .ransom span:nth-child(10) { font-family: Georgia, serif; background: var(--cherry); color: #fff; transform: rotate(-2deg); }
 
+/* ---------- red push pin: --tx/--ty mark where the needle tip goes in ---------- */
+.pushpin {
+  position: absolute;
+  z-index: 3;
+  left: var(--tx, 50%);
+  top: var(--ty, 10%);
+  width: var(--pw, 12%);
+  height: auto;
+  transform: translate(-8.9%, -97.6%);
+  filter: drop-shadow(1px 2px 1.5px rgba(40, 22, 8, .45)) drop-shadow(3px 6px 5px rgba(40, 22, 8, .25));
+  pointer-events: none;
+}
+.admit .pushpin { --tx: 47%; --ty: 16%; --pw: 11%; }
+.pushpin--ring { --tx: 43%; --ty: 3.6%; --pw: 17%; }
+
 /* ---------- swatch book: more projects on a ring of cards ----------
    Every card shares the front card's frame from the photo (a slight
    rotate + skew), pivoting on the ring hole so cards swing out on hover. */
