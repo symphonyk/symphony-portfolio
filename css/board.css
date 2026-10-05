@@ -475,20 +475,18 @@ a.item.admit:hover { box-shadow: none; }
 .sticker--smile .f { fill: #2b1d1d; stroke: none; }
 .sticker--smile .m { fill: none; stroke: #2b1d1d; stroke-width: 2.4; stroke-linecap: round; }
 
-/* ---------- Golden Gate print ---------- */
-.city img { aspect-ratio: 3 / 2; }
-.city__note {
+/* ---------- sister photo in a red frame ---------- */
+.sis img { display: block; width: 100%; height: auto; filter: drop-shadow(0 1px 1px rgba(40, 22, 8, .35)) drop-shadow(0 6px 8px rgba(40, 22, 8, .3)); }
+.sis .tape--top { z-index: 2; }
+.sis__note {
   position: absolute;
-  right: 6%;
-  bottom: -1.2em;
+  left: 8%;
+  bottom: 4.5%;
   font-family: var(--pen);
-  font-size: 2.1em;
-  color: #1f3f9a;
+  font-size: 2.3em;
   line-height: 1;
-  padding: .2em .6em .25em;
-  background: #fff;
-  box-shadow: var(--shadow);
-  transform: rotate(4deg);
+  color: #fff;
+  transform: rotate(-3deg);
 }
 
 /* ---------- bunting: W O R K ---------- */
@@ -821,7 +819,7 @@ a.item.admit:hover { box-shadow: none; }
   .projects-title { order: 3; grid-column: 1 / -1; justify-self: center; width: 92%; }
   .bunting__flags span { font-size: 3em; }
   .product:nth-of-type(n) { order: 3; }
-  .city { order: 8; grid-column: 1 / -1; width: 80%; justify-self: center; }
+  .sis { order: 8; grid-column: 1 / -1; width: 80%; justify-self: center; }
   .stash { order: 4; grid-column: 1 / -1; width: 66%; justify-self: center; margin-top: 30vw; }
   .fun { order: 5; grid-column: 1 / -1; width: 62%; justify-self: center; }
   .envelope { order: 6; grid-column: 1 / -1; width: 62%; justify-self: center; }
@@ -837,5 +835,5 @@ a.item.admit:hover { box-shadow: none; }
 @media (max-width: 380px) {
   .stage { grid-template-columns: 1fr; gap: 12vw; }
   .item { width: 82%; justify-self: center; }
-  .envelope, .card, .city, .projects-title { width: 88%; }
+  .envelope, .card, .sis, .projects-title { width: 88%; }
 }
