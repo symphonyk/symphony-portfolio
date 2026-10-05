@@ -511,7 +511,7 @@ body.sheet-page {
   align-items: start;
   padding-right: calc(var(--pad) + 6cqw);
 }
-.about .clean__head { max-width: 36rem; padding-top: calc(var(--edge) + 92px); }
+.about .clean__head { max-width: 36rem; padding-top: calc(var(--edge) + 136px); }
 .about .clean__tagline { margin-top: .9em; }
 .about .clean__body { margin-top: 2em; }
 .about__photo {
