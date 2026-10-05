@@ -83,6 +83,17 @@
     <h2 class="item pennant projects-title" aria-label="Work" style="--x: 44%; --y: -1.5%; --w: 42%; --r: -13deg; --s: 1.909; --z: 15;">
       <img class="pennant__img" src="assets/img/pennant.webp" width="668" height="235" alt="" aria-hidden="true">
       <span class="pennant__text" aria-hidden="true">WORK</span>
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <filter id="felt" x="-5%" y="-10%" width="110%" height="120%">
+          <feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="3" seed="4" result="fuzz"/>
+          <feDisplacementMap in="SourceGraphic" in2="fuzz" scale="3.5" xChannelSelector="R" yChannelSelector="G" result="rough"/>
+          <feGaussianBlur in="rough" stdDeviation=".35" result="soft"/>
+          <feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="2" seed="9" result="grain"/>
+          <feColorMatrix in="grain" type="matrix" values=".33 .33 .33 0 .55  .33 .33 .33 0 .55  .33 .33 .33 0 .55  0 0 0 0 1" result="tone"/>
+          <feComposite in="soft" in2="tone" operator="arithmetic" k1="1" result="felted"/>
+          <feComposite in="felted" in2="soft" operator="in"/>
+        </filter>
+      </svg>
     </h2>
 
     <a class="item framed framed--film product" href="projects/headset-habitat/" style="--x: 90.5%; --y: 1.5%; --w: 17.25%; --r: -2.5deg; --s: 1.121;">
