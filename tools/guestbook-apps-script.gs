@@ -11,6 +11,8 @@
  *      Click Deploy and allow access (Advanced → "Go to … (unsafe)" is expected for your own script).
  *   4. Copy the "Web app URL" (ends in /exec) and paste it into NOTES_URL at the top of js/guestbook.js.
  *
+ * Email alerts: pick "testEmail" in the function menu at the top and click Run once to allow it.
+ *
  * Taking a note down: delete its row in the "Notes" tab, or type x in its "Hide" column.
  * If you change this code later: Deploy → Manage deployments → edit (pencil) → Version: New version → Deploy
  * (that keeps the same URL).
@@ -60,7 +62,28 @@ function doPost(e) {
   } finally {
     lock.releaseLock();
   }
+  notify_(note, name);
   return json_({ ok: true, note: { note, name, t: Date.now() } });
+}
+
+// Emails Symphony (the Google account that owns this script) about each new note.
+function notify_(note, name) {
+  try {
+    MailApp.sendEmail({
+      to: Session.getEffectiveUser().getEmail(),
+      subject: '✎ New note on symphonykoss.com from ' + (name || 'a friend'),
+      body: '"' + note + '"\n\n– ' + (name || 'a friend') +
+        '\n\nTo take it down, delete its row (or type x in the Hide column) here:\n' +
+        SpreadsheetApp.getActiveSpreadsheet().getUrl(),
+    });
+  } catch (err) {
+    // the note is already saved; a failed email shouldn't stop it
+  }
+}
+
+// Run this once from the editor (select it, click Run) to allow email and get a test message.
+function testEmail() {
+  notify_('This is a test. New notes will show up like this!', 'Your website');
 }
 
 function sheet_() {
