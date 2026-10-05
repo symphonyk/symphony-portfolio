@@ -24,15 +24,14 @@
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  document.querySelectorAll('a.item, a.swatch__card').forEach((link) => {
+  document.querySelectorAll('a.item').forEach((link) => {
     link.addEventListener('click', (event) => {
       const opensElsewhere =
         link.target === '_blank' ||
         link.href.startsWith('mailto:') ||
         event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0;
       if (reduceMotion) return;
-      // a swatch page wiggles on its own, not the whole book
-      const item = link.classList.contains('swatch__card') ? link : link.closest('.item');
+      const item = link.closest('.item');
       if (!item) return;
 
       item.classList.remove('is-pressed');

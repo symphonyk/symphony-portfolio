@@ -98,8 +98,8 @@ a.item:focus-visible {
   z-index: 20;
   transform: rotate(calc(var(--r) * .35)) translateY(-1.5%) scale(1.07);
 }
-a.item:hover:not(.cutout):not(.badge):not(.notebook):not(.admit):not(.framed),
-a.item:focus-visible:not(.cutout):not(.framed) { box-shadow: var(--shadow-lifted); }
+a.item:hover:not(.cutout):not(.badge):not(.notebook):not(.admit):not(.framed):not(.swatch),
+a.item:focus-visible:not(.cutout):not(.framed):not(.swatch) { box-shadow: var(--shadow-lifted); }
 
 .item.is-pressed {
   animation: wiggle .32s ease-in-out;
@@ -579,12 +579,12 @@ a.item.admit:hover { box-shadow: none; }
   pointer-events: none;
 }
 .admit .pushpin { --tx: 47%; --ty: 16%; --pw: 11%; }
-.pushpin--clip { --tx: 62%; --ty: 4%; --pw: 11%; z-index: 1; } /* pins the folder back, so the pages rise over it */
+.pushpin--clip { --tx: 62%; --ty: 4%; --pw: 11%; }
 
-/* ---------- more projects: a manila folder ----------
+/* ---------- all projects: a manila folder ----------
    The photo is split into the folder's back (with the papers inside) and
-   its front flap; the project pages sit between the two, hidden under the
-   flap, and peek up out of the folder on hover. */
+   its front flap, which carries the handwritten label. Clicking it opens
+   the projects page (projects/). */
 .swatch {
   container-type: inline-size;
   aspect-ratio: 578 / 441;
@@ -609,57 +609,7 @@ a.item.admit:hover { box-shadow: none; }
   color: #1f2a4a;
   transform: rotate(-3deg);
 }
-/* the pages inside: only their top corners ever show above the flap */
-.swatch__card {
-  --rise: 0cqw;
-  --tilt: 0deg;
-  position: absolute;
-  z-index: 2;
-  top: 25%;
-  width: 40%;
-  height: 52%;
-  border-radius: .6cqw .6cqw 0 0;
-  background: linear-gradient(180deg, rgba(255, 255, 255, .35), transparent 30%), url("../assets/textures/paper-grain.jpg") 0 0 / 60cqw, var(--sheet, #fbf8f1);
-  background-blend-mode: normal, multiply, normal;
-  box-shadow: 0 0 0 .25cqw rgba(0, 0, 0, .12), 0 -.6cqw 1.6cqw rgba(40, 22, 8, .18);
-  transform: translateY(calc(-1 * var(--rise))) rotate(var(--tilt));
-  transition: transform .45s cubic-bezier(.34, 1.45, .64, 1), filter .25s ease;
-}
-.swatch__card--1 { --sheet: #c8323f; left: 12%; --tilt: -5deg; }
-.swatch__card--2 { --sheet: #fbf6ec; left: 42%; --tilt: 4deg; }
-/* a thin red rule across the cream page, like letterhead */
-.swatch__card--2::before {
-  content: "";
-  position: absolute;
-  inset: 3cqw 0 auto;
-  height: .7cqw;
-  background: #c8323f;
-  opacity: .85;
-}
-.swatch__label {
-  position: absolute;
-  left: 8%;
-  top: 4.5cqw;
-  font: 400 7.2cqw/1 var(--pen);
-  white-space: nowrap;
-  color: #fff8f0;
-}
-.swatch__card--2 .swatch__label { color: #1f2a4a; top: 5.4cqw; }
-.swatch:hover,
-.swatch:focus-within { z-index: 20; }
-.swatch:hover .swatch__card--1,
-.swatch:focus-within .swatch__card--1 { --rise: 21cqw; --tilt: -8deg; }
-.swatch:hover .swatch__card--2,
-.swatch:focus-within .swatch__card--2 { --rise: 18cqw; --tilt: 6deg; transition-delay: .06s; }
-/* the page under the pointer pops up a little more; the other dims */
-.swatch .swatch__card:hover,
-.swatch .swatch__card:focus-visible { --rise: 27cqw; }
-.swatch:has(.swatch__card:hover) .swatch__card:not(:hover) { filter: brightness(.85) saturate(.8); }
-.swatch__card.is-pressed { --rise: 31cqw; }
-@media (hover: none) {
-  .swatch .swatch__card--1 { --rise: 21cqw; --tilt: -8deg; }
-  .swatch .swatch__card--2 { --rise: 18cqw; --tilt: 6deg; }
-}
+a.item.swatch:hover { box-shadow: none; filter: drop-shadow(0 3px 3px rgba(40, 22, 8, .3)) drop-shadow(0 20px 20px rgba(40, 22, 8, .35)); }
 
 /* ---------- realistic paper ----------
    Photographed paper grain (ambientCG, CC0) multiplied onto each
@@ -728,8 +678,7 @@ a.item.admit:hover { box-shadow: none; }
   .sticker { display: none; }
 }
 @media (hover: none) and (max-width: 760px) {
-  /* phones show the pages already peeking out, so leave a little room up top */
-  .swatch { width: 70%; margin-top: 8vw; }
+  .swatch { width: 70%; }
 }
 
 @media (max-width: 380px) {
