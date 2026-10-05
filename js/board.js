@@ -62,3 +62,12 @@
     document.querySelectorAll('.is-pressed').forEach((el) => el.classList.remove('is-pressed'));
   });
 })();
+
+// today's date on the ID badge (MM·DD·YY)
+(() => {
+  const el = document.querySelector('.badge__date');
+  if (!el) return;
+  const d = new Date();
+  const p = (n) => String(n).padStart(2, '0');
+  el.textContent = `${p(d.getMonth() + 1)}·${p(d.getDate())}·${p(d.getFullYear() % 100)}`;
+})();
