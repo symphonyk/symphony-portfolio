@@ -419,10 +419,6 @@ def build(slug):
     <div class="sheet__body">
       {(chr(10) + chr(10) + '      ').join(secs)}
     </div>
-
-    <nav class="sheet__pager" aria-label="More projects">
-      {(chr(10) + '      ').join(pager)}
-    </nav>
   </main>
 
   <script src="../../js/scrapbook.js" defer></script>
