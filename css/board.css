@@ -128,10 +128,10 @@ a.item.badge:hover { box-shadow: none; filter: drop-shadow(0 3px 3px rgba(40, 22
 .badge__photo {
   display: block;
   overflow: hidden;
-  width: 88%;
+  width: 100%;
   align-self: center;
   aspect-ratio: 4 / 5;
-  margin: .5em 0 .9em;
+  margin: .2em 0 0;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, .12);
 }
 /* same crop as the original polaroid: zoomed a little, bottom edge anchored */
@@ -141,6 +141,7 @@ a.item.badge:hover { box-shadow: none; filter: drop-shadow(0 3px 3px rgba(40, 22
   align-items: baseline;
   gap: .5em;
   border-bottom: 1px dashed rgba(0, 0, 0, .4);
+  margin-top: auto;
   padding: .1em 0 .05em;
 }
 .badge__field b {
@@ -157,10 +158,10 @@ a.item.badge:hover { box-shadow: none; filter: drop-shadow(0 3px 3px rgba(40, 22
   font-style: normal;
   font-size: 1.9em;
   line-height: 1.05;
-  color: #1b1b1b;
+  color: #1f3f9a;
   white-space: nowrap;
 }
-.badge__foot { display: flex; gap: .5em; justify-content: space-between; align-items: flex-end; margin-top: auto; }
+.badge__foot { display: flex; gap: .5em; justify-content: space-between; align-items: flex-end; margin-top: .6em; }
 .badge__code {
   height: 1.3em;
   width: 48%;
