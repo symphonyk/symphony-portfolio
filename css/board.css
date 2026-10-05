@@ -579,91 +579,157 @@ a.item.admit:hover { box-shadow: none; }
   pointer-events: none;
 }
 .admit .pushpin { --tx: 47%; --ty: 16%; --pw: 11%; }
-.pushpin--ring { --tx: 56.5%; --ty: 3.4%; --pw: 22%; }
+.pushpin--clip { --tx: 44.2%; --ty: 5.9%; --pw: 16%; }
 
-/* ---------- swatch book: more projects on a ring of cards ----------
+/* ---------- clipped cards: more projects held by a binder clip ----------
    Every card shares the front card's frame from the photo (a slight
-   rotate + skew), pivoting on the ring hole. The back pages peek out to
-   the right, fan out on hover, and the page under the pointer comes forward. */
+   rotate + skew). On hover the top card flips up over the clip like a
+   notepad page, the pages behind spread out, and the page under the
+   pointer lifts out. */
 .swatch {
+  --hinge: 23%;
   container-type: inline-size;
-  aspect-ratio: 456 / 712;
+  aspect-ratio: 382 / 307;
   filter: drop-shadow(0 1px 1px rgba(40, 22, 8, .3)) drop-shadow(0 8px 8px rgba(40, 22, 8, .28));
 }
-.swatch__book { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .swatch__card {
   --swing: 0deg;
   --lift: 0deg;
+  --slide: 0cqw;
+  --drop: 0cqw;
   --grow: 1;
   position: absolute;
-  left: 21.2cqw;
-  top: 19.09cqw;
-  width: 74.11cqw;
-  height: 127.68cqw;
-  transform-origin: 51.1% 5.72%;
-  transform: rotate(calc(var(--swing) + var(--lift))) matrix(.9899, .142, -.1675, .9859, 0, 0) scale(var(--grow));
-  transition: transform .5s cubic-bezier(.34, 1.4, .64, 1), filter .25s ease, box-shadow .25s ease;
+  left: 3.1cqw;
+  top: 16.52cqw;
+  width: 86.63cqw;
+  height: 61.07cqw;
+  transform-origin: 47.79% 8.1%;
+  transform: rotate(calc(var(--swing) + var(--lift))) translate(var(--slide), var(--drop)) matrix(.9987, .0514, -.0493, .9988, 0, 0) scale(var(--grow));
+  transition: transform .5s cubic-bezier(.34, 1.3, .64, 1), filter .25s ease, box-shadow .25s ease;
 }
-.swatch__front { z-index: 3; cursor: default; }
-a.swatch__card {
-  background: radial-gradient(circle at 51.1% 5.72%, #3a3633 0 3.4cqw, rgba(0, 0, 0, .25) 3.6cqw, transparent 4.5cqw), url("../assets/img/swatch-card.webp") center / 100% 100%;
-  box-shadow: 0 0 0 .4cqw rgba(0, 0, 0, .08), 0 2cqw 4cqw rgba(40, 22, 8, .25);
+a.swatch__card,
+.swatch__strip,
+.swatch__face,
+.swatch__back {
+  background: url("../assets/img/clip-card.webp") center / 100% 100%;
 }
-.swatch__card img {
+a.swatch__card { box-shadow: 0 0 0 .25cqw rgba(0, 0, 0, .14), 0 1.5cqw 3cqw rgba(40, 22, 8, .25); }
+/* the bit of the top card that stays under the clip */
+.swatch__strip {
+  z-index: 3;
+  clip-path: inset(0 0 calc(100% - var(--hinge)) 0);
+  box-shadow: inset 0 0 0 .25cqw rgba(0, 0, 0, .1);
+  pointer-events: none;
+}
+.swatch__clip {
   position: absolute;
-  left: 9%;
-  top: 16%;
-  width: 82%;
-  height: 50%;
-  object-fit: cover;
-  box-shadow: 0 .4cqw 1cqw rgba(0, 0, 0, .3);
+  z-index: 4;
+  left: 33.77%;
+  top: -.33%;
+  width: 21.47%;
+  height: auto;
+  pointer-events: none;
 }
-/* two little staples holding each photo on, like the fabric swatches */
-.swatch__card::before,
-.swatch__card::after {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  top: 17.5%;
-  width: 12cqw;
-  height: 1.2cqw;
-  border-radius: .5cqw;
-  background: linear-gradient(#f2f2f2, #9a9a9a 60%, #6e6e6e);
-  box-shadow: 0 .25cqw .4cqw rgba(0, 0, 0, .35);
-}
-.swatch__card::before { left: 13%; transform: rotate(-4deg); }
-.swatch__card::after { right: 13%; transform: rotate(3deg); }
-.swatch__note,
-.swatch__label {
+/* the flap: everything below the clip, flipping up on its top edge */
+.swatch__flap { z-index: 5; pointer-events: none; }
+.swatch__leaf {
+  --flip: 0deg;
   position: absolute;
   left: 0;
   right: 0;
+  top: var(--hinge);
+  bottom: 0;
+}
+/* each side turns on its own (no shared 3D space), so Safari keeps the
+   photo and note drawn on the front */
+.swatch__face,
+.swatch__back {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 0;
+  transform: perspective(180cqw) rotateX(var(--flip));
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background-size: 100% 130%;
+  background-position: bottom;
+  box-shadow: 0 0 0 .25cqw rgba(0, 0, 0, .12), 0 1.2cqw 2.4cqw rgba(40, 22, 8, .22);
+  transition: transform .6s cubic-bezier(.3, 1.25, .6, 1), visibility 0s .14s;
+}
+/* the sides swap as the flap passes edge-on */
+.swatch__back { visibility: hidden; }
+.swatch:hover .swatch__face,
+.swatch:focus-within .swatch__face { visibility: hidden; }
+.swatch:hover .swatch__back,
+.swatch:focus-within .swatch__back { visibility: visible; }
+.swatch__back {
+  transform: perspective(180cqw) rotateX(var(--flip)) rotateY(180deg);
+  background-image: linear-gradient(rgba(60, 40, 20, .1), rgba(60, 40, 20, .1)), url("../assets/img/clip-card.webp");
+  background-size: 100% 100%, 100% 130%;
+}
+.swatch__card img,
+.swatch__face img {
+  position: absolute;
+  left: 62%;
+  top: 24%;
+  width: 32%;
+  height: 66%;
+  object-fit: cover;
+  box-shadow: 0 .3cqw .8cqw rgba(0, 0, 0, .3);
+}
+.swatch__face img { left: 44%; top: 1.5%; width: 50%; height: 88%; }
+/* two little staples holding each photo on */
+a.swatch__card::before,
+a.swatch__card::after,
+.swatch__face::before,
+.swatch__face::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 25.5%;
+  width: 5.5cqw;
+  height: .9cqw;
+  border-radius: .4cqw;
+  background: linear-gradient(#f2f2f2, #9a9a9a 60%, #6e6e6e);
+  box-shadow: 0 .2cqw .3cqw rgba(0, 0, 0, .35);
+}
+a.swatch__card::before { left: 64%; transform: rotate(-4deg); }
+a.swatch__card::after { right: 8%; transform: rotate(3deg); }
+.swatch__face::before { top: 3.5%; left: 47%; width: 7cqw; transform: rotate(-4deg); }
+.swatch__face::after { top: 3.5%; right: 9%; width: 7cqw; transform: rotate(3deg); }
+.swatch__note,
+.swatch__label {
+  position: absolute;
   font-family: var(--pen);
-  line-height: 1;
+  line-height: 1.05;
   color: #1b1b1b;
   text-align: center;
-  white-space: nowrap;
 }
-.swatch__note { top: 73%; font-size: 10cqw; transform: rotate(-2deg); }
-.swatch__label { top: 72%; font-size: 9.5cqw; }
+.swatch__note { left: 4%; width: 38%; top: 22%; font-size: 7.4cqw; transform: rotate(-3deg); }
+.swatch__label { left: 4%; width: 54%; top: 46%; font-size: 7.4cqw; white-space: nowrap; transform: rotate(-3deg); }
+.swatch__card--2 .swatch__label { left: 60%; width: 34%; top: 6%; font-size: 6cqw; transform: rotate(-2deg); }
 
 /* at rest: the back pages peek out a little to the right */
-.swatch__card--1 { --swing: -7deg; }
-.swatch__card--2 { --swing: -14deg; }
+.swatch__card--1 { --slide: 3cqw; --swing: -1deg; }
+.swatch__card--2 { --slide: 6.5cqw; --swing: -2deg; }
 .swatch:hover,
 .swatch:focus-within { z-index: 20; }
+.swatch:hover .swatch__leaf,
+.swatch:focus-within .swatch__leaf { --flip: 168deg; }
 .swatch:hover .swatch__card--1,
-.swatch:focus-within .swatch__card--1 { --swing: -34deg; }
+.swatch:focus-within .swatch__card--1 { --slide: 0cqw; --swing: 0deg; }
 .swatch:hover .swatch__card--2,
-.swatch:focus-within .swatch__card--2 { --swing: -66deg; transition-delay: .04s; }
+.swatch:focus-within .swatch__card--2 { --slide: 52cqw; --drop: 3cqw; --swing: -6deg; transition-delay: .05s; }
 /* the page under the pointer lifts out over the other page, which dims */
 a.swatch__card:hover,
-a.swatch__card:focus-visible { z-index: 1; --lift: -7deg; --grow: 1.06; box-shadow: 0 0 0 .4cqw rgba(0, 0, 0, .08), 0 4cqw 7cqw rgba(40, 22, 8, .4); }
+a.swatch__card:focus-visible { z-index: 1; --lift: -2deg; --grow: 1.05; box-shadow: 0 0 0 .25cqw rgba(0, 0, 0, .14), 0 3cqw 6cqw rgba(40, 22, 8, .4); }
 .swatch:has(a.swatch__card:hover) a.swatch__card:not(:hover) { filter: brightness(.82) saturate(.8); }
-a.swatch__card.is-pressed { --lift: -9deg; }
+a.swatch__card.is-pressed { --lift: -6deg; }
 @media (hover: none) {
-  .swatch .swatch__card--1 { --swing: -34deg; }
-  .swatch .swatch__card--2 { --swing: -66deg; }
+  .swatch .swatch__leaf { --flip: 168deg; }
+  .swatch .swatch__face { visibility: hidden; }
+  .swatch .swatch__back { visibility: visible; }
+  .swatch .swatch__card--1 { --slide: 0cqw; --swing: 0deg; }
+  .swatch .swatch__card--2 { --slide: 52cqw; --drop: 3cqw; --swing: -6deg; }
 }
 
 /* ---------- realistic paper ----------
@@ -731,7 +797,10 @@ a.swatch__card.is-pressed { --lift: -9deg; }
   .envelope { order: 6; grid-column: 1 / -1; width: 62%; justify-self: center; }
   .card { order: 7; grid-column: 1 / -1; width: 62%; justify-self: center; }
   .sticker { display: none; }
-
+}
+@media (hover: none) and (max-width: 760px) {
+  /* phones show the cards already flipped open, so leave room up top and to the right */
+  .swatch { width: 62%; justify-self: start; margin: 26vw 0 4vw 4%; }
 }
 
 @media (max-width: 380px) {

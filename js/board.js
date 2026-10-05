@@ -24,7 +24,7 @@
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  document.querySelectorAll('a.item, .swatch__card').forEach((link) => {
+  document.querySelectorAll('a.item, a.swatch__card').forEach((link) => {
     link.addEventListener('click', (event) => {
       const opensElsewhere =
         link.target === '_blank' ||
