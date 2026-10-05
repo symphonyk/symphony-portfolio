@@ -527,7 +527,7 @@ a.item.admit:hover { box-shadow: none; }
 .framed--star .caption { bottom: 6%; left: 18%; }
 .framed--plaid .caption { bottom: 7%; padding: .05em .4em; left: 50%; right: auto; transform: translateX(-50%); background: #fdfdfb; box-shadow: 0 1px 2px rgba(0,0,0,.15); }
 .framed--film .caption { bottom: -.7em; left: 50%; right: auto; padding: .1em .5em; background: #fdfdfb; box-shadow: var(--shadow); transform: translateX(-50%) rotate(-3deg); }
-.framed--clip .caption { bottom: 6.5%; right: 14%; }
+.framed--clip .caption { bottom: 4.5%; color: #fdfaf3; }
 .framed .pin--top, .framed .tape--top { z-index: 2; }
 
 .print { padding: .75em; }
