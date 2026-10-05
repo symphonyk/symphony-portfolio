@@ -1,5 +1,4 @@
-// Corkboard interactions: a little wiggle before following a link,
-// and the pink envelope that the extra projects slide out of.
+// Corkboard interactions: a little wiggle before following a link.
 
 (() => {
   if (new URLSearchParams(location.search).has('edit')) {
@@ -25,7 +24,7 @@
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  document.querySelectorAll('a.item, .stash__card').forEach((link) => {
+  document.querySelectorAll('a.item, .folder__photo').forEach((link) => {
     link.addEventListener('click', (event) => {
       const opensElsewhere =
         link.target === '_blank' ||
@@ -43,18 +42,6 @@
       event.preventDefault();
       setTimeout(() => { window.location.href = link.href; }, 280);
     });
-  });
-
-  // Touch screens have no hover: tapping the envelope pulls the projects out.
-  document.querySelectorAll('.stash').forEach((stash) => {
-    const pocket = stash.querySelector('.stash__pocket');
-    const setOpen = (open) => {
-      stash.classList.toggle('is-open', open);
-      pocket.setAttribute('aria-expanded', String(open));
-    };
-    pocket.addEventListener('click', () => setOpen(!stash.classList.contains('is-open')));
-    document.addEventListener('click', (event) => { if (!stash.contains(event.target)) setOpen(false); });
-    stash.addEventListener('keydown', (event) => { if (event.key === 'Escape') { setOpen(false); pocket.focus(); } });
   });
 
   // Restore the board if the user comes back with the browser's back button.

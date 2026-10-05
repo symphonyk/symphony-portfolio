@@ -136,7 +136,7 @@
   function updateReadout() {
     placeOverlay();
     if (!selected) { readout.textContent = '👆 Click any item to select it — then drag it, or use the dots to resize/tilt'; return; }
-    const label = selected.querySelector('.caption, .print__note, .stash__label, .badge__field i, .notebook__lead, .admit__title, .letter__hi, .bizcard__name, .sis__note')?.textContent
+    const label = selected.querySelector('.caption, .print__note, .folder__note, .badge__field i, .notebook__lead, .admit__title, .letter__hi, .bizcard__name, .sis__note')?.textContent
       || selected.getAttribute('aria-label') || selected.className.split(' ')[1];
     readout.textContent = `${label.trim()} — x ${num(selected, '--x')}%, y ${num(selected, '--y')}%, width ${num(selected, '--w')}%, tilt ${num(selected, '--r')}°`;
   }
