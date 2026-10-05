@@ -9,6 +9,76 @@ body.sheet-page {
   color: #2f2b28;
 }
 
+/* ---------- project polaroids pinned along the top ----------
+   Every project as a small polaroid; the one you're reading is bigger,
+   straight, red-pinned and underlined. */
+.minis {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: clamp(12px, 1.6vw, 22px);
+  max-width: 1240px;
+  /* sits in the top band the page leaves for the old back tab */
+  margin: calc(-1 * clamp(64px, 7vw, 92px) + clamp(4px, 1vw, 12px)) auto clamp(22px, 2.6vw, 34px);
+  padding: 14px 6px 10px;
+}
+.minis .back-tab {
+  position: relative;
+  top: auto;
+  left: auto;
+  flex: none;
+  align-self: center;
+  margin-right: clamp(4px, 1vw, 14px);
+}
+.minis__item {
+  --r: 0deg;
+  position: relative;
+  flex: none;
+  width: clamp(92px, 8.4vw, 116px);
+  padding: 6px 6px 0;
+  background: #fdfdfb;
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  transform: rotate(var(--r));
+  filter: saturate(.8) brightness(.97);
+  transition: transform .35s cubic-bezier(.34, 1.56, .64, 1), box-shadow .3s ease, filter .3s ease;
+}
+.minis__item img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+.minis__item .pin { top: -.45em; left: 50%; margin-left: -.675em; font-size: .78rem; }
+.minis__name {
+  display: block;
+  padding: .3em 0 .35em;
+  font: 400 clamp(1.05rem, 1.45vw, 1.3rem)/1 var(--pen);
+  text-align: center;
+  white-space: nowrap;
+  color: #1f2a4a;
+}
+.minis__name--long { font-size: clamp(.92rem, 1.22vw, 1.12rem); letter-spacing: -.02em; }
+.minis__item:hover,
+.minis__item:focus-visible { transform: rotate(0) translateY(-4px) scale(1.06); box-shadow: var(--shadow-lifted); filter: none; }
+.minis__item.is-current {
+  width: clamp(108px, 9.8vw, 136px);
+  transform: rotate(0) translateY(-2px);
+  box-shadow: 0 0 0 3px var(--cherry), var(--shadow-lifted);
+  filter: none;
+  cursor: default;
+}
+.minis__item.is-current .pin { --pin: var(--cherry); font-size: .95rem; }
+.minis__item.is-current .minis__name { color: var(--cherry); }
+/* a red pen underline under the current one's name */
+.minis__item.is-current .minis__name::after {
+  content: "";
+  display: block;
+  width: 78%;
+  height: 6px;
+  margin: .12em auto 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 8' preserveAspectRatio='none'%3E%3Cpath d='M2 5c14-4 26 2 40-1s26-3 38 0 14 1 18-1' fill='none' stroke='%23e0475b' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+@media (max-width: 1100px) {
+  .minis { justify-content: flex-start; overflow-x: auto; scrollbar-width: none; padding: 16px 12px 14px; margin-inline: calc(-1 * clamp(10px, 4vw, 64px)); scroll-padding-inline: 40%; }
+  .minis::-webkit-scrollbar { display: none; }
+}
+
 /* ---------- back tab on the cork ---------- */
 .back-tab {
   position: fixed;
