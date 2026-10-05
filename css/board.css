@@ -480,10 +480,11 @@ a.item.admit:hover { box-shadow: none; }
 .sis .tape--top { z-index: 2; }
 .sis__note {
   position: absolute;
-  left: 8%;
-  bottom: 4.5%;
+  left: 7%;
+  bottom: 8%;
   font-family: var(--pen);
-  font-size: 2.3em;
+  font-size: 1.85em;
+  white-space: nowrap;
   line-height: 1;
   color: #fff;
   transform: rotate(-3deg);
