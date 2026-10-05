@@ -579,95 +579,89 @@ a.item.admit:hover { box-shadow: none; }
   pointer-events: none;
 }
 .admit .pushpin { --tx: 47%; --ty: 16%; --pw: 11%; }
-.pushpin--clip { --tx: 44.2%; --ty: 5.9%; --pw: 16%; }
+.pushpin--ring { --tx: 56.5%; --ty: 3.4%; --pw: 22%; }
 
-/* ---------- clipped cards: Cherry on top, Spatulove behind ----------
-   Both cards share the tilt of the original photo (a slight rotate +
-   skew) and hang from a binder clip. Spatulove peeks out at rest and
-   swings out to the right on hover; the card under the pointer lifts
-   while the other one dims, so it's clear which one you'll open. */
+/* ---------- swatch book: more projects on a ring of cards ----------
+   Every card shares the front card's frame from the photo (a slight
+   rotate + skew), pivoting on the ring hole. Cherry is the front card;
+   Spatulove peeks out behind it and fans out to the right on hover. The
+   card under the pointer lifts while the other one dims. */
 .swatch {
   container-type: inline-size;
-  aspect-ratio: 382 / 307;
+  aspect-ratio: 456 / 712;
   filter: drop-shadow(0 1px 1px rgba(40, 22, 8, .3)) drop-shadow(0 8px 8px rgba(40, 22, 8, .28));
 }
+.swatch__book { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .swatch__card {
   --swing: 0deg;
   --lift: 0deg;
-  --slide: 0cqw;
-  --drop: 0cqw;
   --grow: 1;
   position: absolute;
-  left: 3.1cqw;
-  top: 16.52cqw;
-  width: 86.63cqw;
-  height: 61.07cqw;
-  background: url("../assets/img/clip-card.webp") center / 100% 100%;
-  box-shadow: 0 0 0 .25cqw rgba(0, 0, 0, .14), 0 1.5cqw 3cqw rgba(40, 22, 8, .25);
-  transform-origin: 47.79% 8.1%;
-  transform: rotate(calc(var(--swing) + var(--lift))) translate(var(--slide), var(--drop)) matrix(.9987, .0514, -.0493, .9988, 0, 0) scale(var(--grow));
-  transition: transform .5s cubic-bezier(.34, 1.3, .64, 1), filter .25s ease, box-shadow .25s ease;
+  left: 21.2cqw;
+  top: 19.09cqw;
+  width: 74.11cqw;
+  height: 127.68cqw;
+  transform-origin: 51.1% 5.72%;
+  transform: rotate(calc(var(--swing) + var(--lift))) matrix(.9899, .142, -.1675, .9859, 0, 0) scale(var(--grow));
+  transition: transform .5s cubic-bezier(.34, 1.4, .64, 1), filter .25s ease, box-shadow .25s ease;
 }
-.swatch__card--back { z-index: 1; --slide: 6.5cqw; --swing: -2deg; }
-.swatch__card--front { z-index: 2; }
-.swatch__clip {
-  position: absolute;
-  z-index: 4;
-  left: 33.77%;
-  top: -.33%;
-  width: 21.47%;
-  height: auto;
-  pointer-events: none;
+.swatch__front { z-index: 3; }
+a.swatch__card {
+  background: radial-gradient(circle at 51.1% 5.72%, #3a3633 0 3.4cqw, rgba(0, 0, 0, .25) 3.6cqw, transparent 4.5cqw), url("../assets/img/swatch-card.webp") center / 100% 100%;
+  box-shadow: 0 0 0 .4cqw rgba(0, 0, 0, .08), 0 2cqw 4cqw rgba(40, 22, 8, .25);
 }
 .swatch__card img {
   position: absolute;
-  left: 44%;
-  top: 24%;
-  width: 50%;
-  height: 68%;
+  left: 9%;
+  top: 16%;
+  width: 82%;
+  height: 50%;
   object-fit: cover;
-  box-shadow: 0 .3cqw .8cqw rgba(0, 0, 0, .3);
+  box-shadow: 0 .4cqw 1cqw rgba(0, 0, 0, .3);
 }
-/* two little staples holding each photo on */
+/* two little staples holding each photo on, like the fabric swatches */
 .swatch__card::before,
 .swatch__card::after {
   content: "";
   position: absolute;
   z-index: 1;
-  top: 25.5%;
-  width: 5.5cqw;
-  height: .9cqw;
-  border-radius: .4cqw;
+  top: 17.5%;
+  width: 12cqw;
+  height: 1.2cqw;
+  border-radius: .5cqw;
   background: linear-gradient(#f2f2f2, #9a9a9a 60%, #6e6e6e);
-  box-shadow: 0 .2cqw .3cqw rgba(0, 0, 0, .35);
+  box-shadow: 0 .25cqw .4cqw rgba(0, 0, 0, .35);
 }
-.swatch__card::before { left: 47%; width: 7cqw; transform: rotate(-4deg); }
-.swatch__card::after { right: 9%; width: 7cqw; transform: rotate(3deg); }
+.swatch__card::before { left: 13%; transform: rotate(-4deg); }
+.swatch__card::after { right: 13%; transform: rotate(3deg); }
+.swatch__note,
 .swatch__label {
   position: absolute;
-  left: 44%;
-  width: 50%;
-  top: 5%;
-  font: 400 8cqw/1.05 var(--pen);
+  left: 0;
+  right: 0;
+  font-family: var(--pen);
+  line-height: 1;
+  color: #1b1b1b;
   text-align: center;
   white-space: nowrap;
-  color: #1b1b1b;
-  transform: rotate(-2deg);
 }
-.swatch__card--front .swatch__label { left: 3%; width: 40%; top: 46%; font-size: 9cqw; transform: rotate(-4deg); }
+.swatch__note { top: 73%; font-size: 10cqw; transform: rotate(-2deg); }
+.swatch__label { top: 72%; font-size: 9.5cqw; }
 
+/* at rest: Spatulove peeks out a little to the right */
+.swatch__card--1 { --swing: -17deg; }
 .swatch:hover,
 .swatch:focus-within { z-index: 20; }
-.swatch:hover .swatch__card--back,
-.swatch:focus-within .swatch__card--back { --slide: 52cqw; --drop: 3cqw; --swing: -6deg; }
+.swatch:hover .swatch__card--1,
+.swatch:focus-within .swatch__card--1 { --swing: -52deg; }
 /* the card under the pointer lifts out over the other one, which dims */
-.swatch__card:hover,
-.swatch__card:focus-visible { z-index: 3; --lift: -2deg; --grow: 1.05; box-shadow: 0 0 0 .25cqw rgba(0, 0, 0, .14), 0 3cqw 6cqw rgba(40, 22, 8, .4); }
-.swatch:has(.swatch__card:hover) .swatch__card:not(:hover),
-.swatch:has(.swatch__card:focus-visible) .swatch__card:not(:focus-visible) { filter: brightness(.78) saturate(.75); }
-.swatch__card.is-pressed { --lift: -6deg; }
+a.swatch__card:hover,
+a.swatch__card:focus-visible { z-index: 4; --lift: -7deg; --grow: 1.06; box-shadow: 0 0 0 .4cqw rgba(0, 0, 0, .08), 0 4cqw 7cqw rgba(40, 22, 8, .4); }
+.swatch:has(a.swatch__card:hover) a.swatch__card:not(:hover),
+.swatch:has(a.swatch__card:focus-visible) a.swatch__card:not(:focus-visible) { filter: brightness(.78) saturate(.75); }
+a.swatch__card.is-pressed { --lift: -9deg; }
 @media (hover: none) {
-  .swatch .swatch__card--back { --slide: 52cqw; --drop: 3cqw; --swing: -6deg; }
+  .swatch .swatch__card--1 { --swing: -52deg; }
 }
 
 /* ---------- realistic paper ----------
